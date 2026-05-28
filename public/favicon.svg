@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 384">
+  <rect width="384" height="384" fill="#000"/>
+  <defs>
+    <linearGradient id="gold" x1="60" y1="40" x2="330" y2="330" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2d37b"/>
+      <stop offset="0.42" stop-color="#cfa44b"/>
+      <stop offset="0.72" stop-color="#e3bd64"/>
+      <stop offset="1" stop-color="#af842f"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 70 70" refX="62" refY="35" markerWidth="3.2" markerHeight="3.2" orient="auto">
+      <path d="M4 7 L66 35 L4 63 Z" fill="url(#gold)"/>
+    </marker>
+  </defs>
+  <path d="M102 67A144 144 0 0 1 320 111" fill="none" stroke="url(#gold)" stroke-width="27" marker-end="url(#arrow)"/>
+  <path d="M343 158A145 145 0 0 1 230 322" fill="none" stroke="url(#gold)" stroke-width="27" marker-end="url(#arrow)"/>
+  <path d="M145 311A145 145 0 0 1 48 116" fill="none" stroke="url(#gold)" stroke-width="27" marker-end="url(#arrow)"/>
+  <text x="192" y="244" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="166" font-weight="700" fill="#fff1cb">$</text>
+</svg>

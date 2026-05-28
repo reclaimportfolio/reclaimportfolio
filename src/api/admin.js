@@ -1,0 +1,26 @@
+import { apiRequest } from "../lib/apiClient.js";
+
+export const getAdminOverview = () => apiRequest("admin/overview/", { auth: true, scope: "admin" });
+export const getAdminCases = () => apiRequest("admin/cases/", { auth: true, scope: "admin" });
+export const getAdminCase = (caseId) => apiRequest(`admin/cases/${caseId}/`, { auth: true, scope: "admin" });
+export const updateAdminCase = (caseId, payload) => apiRequest(`admin/cases/${caseId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const getAdminMessages = () => apiRequest("admin/messages/", { auth: true, scope: "admin" });
+export const getAdminMessage = (messageId) => apiRequest(`admin/messages/${messageId}/`, { auth: true, scope: "admin" });
+export const updateAdminMessage = (messageId, payload) => apiRequest(`admin/messages/${messageId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const getAdminNewsletter = () => apiRequest("admin/newsletter/", { auth: true, scope: "admin" });
+export const getAdminNewsletterSubscriber = (subscriberId) => apiRequest(`admin/newsletter/${subscriberId}/`, { auth: true, scope: "admin" });
+export const updateAdminNewsletterSubscriber = (subscriberId, payload) => apiRequest(`admin/newsletter/${subscriberId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const getAdminUsers = () => apiRequest("admin/users/", { auth: true, scope: "admin" });
+export const getAdminUserDetail = (userId) => apiRequest(`admin/users/${userId}/`, { auth: true, scope: "admin" });
+export const updateAdminUser = (userId, payload) => apiRequest(`admin/users/${userId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const getAdminAssetPrices = () => apiRequest("admin/asset-prices/", { auth: true, scope: "admin" });
+export const getAdminAssets = () => apiRequest("admin/assets/", { auth: true, scope: "admin" });
+export const getAdminUserAssets = (userId) => apiRequest(`admin/users/${userId}/assets/`, { auth: true, scope: "admin" });
+export const createAdminUserAsset = (userId, payload) => apiRequest(`admin/users/${userId}/assets/`, { method: "POST", body: payload, auth: true, scope: "admin" });
+export const updateAdminAsset = (assetId, payload) => apiRequest(`admin/assets/${assetId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const deleteAdminAsset = (assetId) => apiRequest(`admin/assets/${assetId}/`, { method: "DELETE", auth: true, scope: "admin" });
+export const getAdminTransactions = () => apiRequest("admin/transactions/", { auth: true, scope: "admin" });
+export const getAdminUserTransactions = (userId) => apiRequest(`admin/users/${userId}/transactions/`, { auth: true, scope: "admin" });
+export const createAdminUserTransaction = (userId, payload) => apiRequest(`admin/users/${userId}/transactions/`, { method: "POST", body: payload, auth: true, scope: "admin" });
+export const updateAdminTransaction = (transactionId, payload) => apiRequest(`admin/transactions/${transactionId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const deleteAdminTransaction = (transactionId) => apiRequest(`admin/transactions/${transactionId}/`, { method: "DELETE", auth: true, scope: "admin" });
