@@ -3,7 +3,7 @@ export const SITE_NAME = 'Reclaim Portfolio';
 export const BRAND_NAME = 'Reclaim Portfolio';
 export const SUPPORT_EMAIL = 'support@reclaimportfolio.com';
 export const SUPPORT_PHONE = '+1-508-591-0090';
-export const OG_IMAGE = `${SITE_URL}/link-preview.png`;
+export const OG_IMAGE = 'https://res.cloudinary.com/dxmdwvmxl/image/upload/v1779968280/link_icon_nc4tnh.png';
 
 const publicPages = {
   home: {
