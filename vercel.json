@@ -3,11 +3,19 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://104.237.9.230:8081/api/:path*"
+      "destination": "https://104-237-9-230.sslip.io/api/:path*"
     },
     {
       "source": "/media/:path*",
-      "destination": "http://104.237.9.230:8081/media/:path*"
+      "destination": "https://104-237-9-230.sslip.io/media/:path*"
+    },
+    {
+      "source": "/static/:path*",
+      "destination": "https://104-237-9-230.sslip.io/static/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
     }
   ]
 }
