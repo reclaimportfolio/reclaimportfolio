@@ -28,7 +28,7 @@ export function ClientTypes(){
           </Reveal>
 
           <Reveal delay={100} className="split-feature-media">
-            <img src={CLIENT_IMAGE} alt="" loading="lazy" />
+            <img src={CLIENT_IMAGE} alt="Client asset recovery consultation workspace" loading="lazy" />
             <div className="split-feature-badge" aria-hidden="true">
               <Ico name="users" />
             </div>

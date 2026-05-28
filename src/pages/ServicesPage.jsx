@@ -29,7 +29,7 @@ function ServiceRowsInline(){
           <a className="srow-learn" onClick={()=>go(serviceRoute(i))}>{t('common.learnMore')} <Ico name="arrow"/></a>
         </div>
         <div className="srow-visual service-page-visual">
-          <img src={SERVICE_IMAGES[s.n]} alt="" loading="lazy" />
+          <img src={SERVICE_IMAGES[s.n]} alt={`${s.title} visual`} loading="lazy" />
         </div>
       </div>
     </Reveal>

@@ -31,7 +31,7 @@ export function CryptoPage(){
             </Reveal>
 
             <Reveal delay={100} className="crypto-page-visual">
-              <img src={SERVICE_IMAGES['03']} alt="" />
+              <img src={SERVICE_IMAGES['03']} alt="Blockchain investigation and wallet tracing visual" loading="lazy" />
             </Reveal>
           </div>
 

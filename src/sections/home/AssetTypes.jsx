@@ -13,7 +13,7 @@ export function AssetTypes(){
       <div className="wrap">
         <div className="split-feature">
           <Reveal className="split-feature-media">
-            <img src={ASSET_IMAGE} alt="" loading="lazy" />
+            <img src={ASSET_IMAGE} alt="Asset recovery case review workspace" loading="lazy" />
             <div className="split-feature-badge" aria-hidden="true">
               <Ico name="vault" />
             </div>

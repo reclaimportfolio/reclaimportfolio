@@ -26,7 +26,7 @@ export function StocksPage(){
             </Reveal>
 
             <Reveal delay={100} className="stocks-visual">
-              <img src={SERVICE_IMAGES['02']} alt="" />
+              <img src={SERVICE_IMAGES['02']} alt="Stock recovery records and financial asset review visual" loading="lazy" />
             </Reveal>
           </div>
 

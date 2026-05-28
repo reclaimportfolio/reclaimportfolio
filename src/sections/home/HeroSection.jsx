@@ -11,7 +11,7 @@ export function HeroSection(){
 
   return (
     <section className="hero hero-redesign">
-      <img className="hero-pattern" src={HERO_IMAGE} alt="" aria-hidden="true"/>
+      <img className="hero-pattern" src={HERO_IMAGE} alt="" aria-hidden="true" fetchPriority="high"/>
 
       <div className="wrap hero-redesign-wrap">
         <div className="hero-redesign-grid hero-single">

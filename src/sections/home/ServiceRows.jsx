@@ -61,7 +61,7 @@ export function ServiceRows(){
               {services.map((s,i)=>(
                 <article className={`service-snap-card ${active===i?'active':''}`} key={s.n}>
                   <div className="service-card-visual">
-                    <img src={SERVICE_IMAGES[s.n]} alt="" loading="lazy" />
+                    <img src={SERVICE_IMAGES[s.n]} alt={`${s.title} visual`} loading="lazy" />
                   </div>
 
                   <div className="service-card-body">

@@ -6,6 +6,7 @@ import { Footer } from './components/Footer.jsx';
 import { TopBar } from './components/TopBar.jsx';
 import { Ctx } from './context.js';
 import { getTranslation } from './i18n.js';
+import { Seo } from './Seo.jsx';
 import { AboutPage } from './pages/AboutPage.jsx';
 import { AuthPage } from './pages/AuthPages.jsx';
 import { CompliancePage } from './pages/CompliancePage.jsx';
@@ -97,6 +98,7 @@ function App(){
   return (
     <Ctx.Provider value={ctx}>
       <SessionProvider>
+        <Seo/>
         {route==='admin'
           ? <Suspense fallback={privateFallback}><AdminApp/></Suspense>
           : route==='dashboard'

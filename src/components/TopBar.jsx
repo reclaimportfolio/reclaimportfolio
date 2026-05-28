@@ -147,9 +147,9 @@ export function TopBar() {
             {t("common.startRecovery")}
           </Btn>
 
-          <button className="admin-link" onClick={() => nav("admin")}>
+          {false && <button className="admin-link" onClick={() => nav("admin")}>
             {t("common.adminPortal")} <span>→</span>
-          </button>
+          </button>}
         </div>
       </aside>
     </header>
