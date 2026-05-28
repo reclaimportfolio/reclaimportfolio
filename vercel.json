@@ -5,8 +5,20 @@
       "destination": "http://104.237.9.230:8081/api/:path*"
     },
     {
+      "source": "/admin",
+      "destination": "http://104.237.9.230:8081/admin/"
+    },
+    {
+      "source": "/admin/",
+      "destination": "http://104.237.9.230:8081/admin/"
+    },
+    {
       "source": "/admin/:path*",
       "destination": "http://104.237.9.230:8081/admin/:path*"
+    },
+    {
+      "source": "/static/:path*",
+      "destination": "http://104.237.9.230:8081/static/:path*"
     },
     {
       "source": "/media/:path*",
