@@ -51,7 +51,7 @@ export function Footer(){
               <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="Enter your email" type="email" />
               <button type="submit" disabled={loading}>{loading?'Sending':'Subscribe'}</button>
             </div>
-            <p>By subscribing you agree to our <button type="button">Privacy Policy</button></p>
+            <p>By subscribing you agree to our <button type="button" onClick={()=>go('privacy')}>Privacy Policy</button></p>
             {status&&<div className={`newsletter-status ${status.startsWith('Subscribed')?'success':'error'}`}>{status}</div>}
           </form>
         </section>
@@ -71,7 +71,9 @@ export function Footer(){
               <h5>Access</h5>
               <button className="footer-pill primary" onClick={()=>go('intake')}>{t('common.startRecovery')}</button>
               <div className="footer-legal-stack">
-                {['Terms of Use','Privacy Policy','Security'].map((item)=><button key={item}>{item}</button>)}
+                <button onClick={()=>go('terms')}>Terms of Use</button>
+                <button onClick={()=>go('privacy')}>Privacy Policy</button>
+                <button onClick={()=>go('compliance')}>Security</button>
               </div>
             </div>
           </div>

@@ -51,6 +51,16 @@ const publicPages = {
     title: 'Start a Confidential Recovery Review | Reclaim Portfolio',
     description: 'Submit a confidential case intake to Reclaim Portfolio for a structured review of lost assets, crypto funds, stock records, or recovery documents.',
   },
+  terms: {
+    path: '/terms-of-use',
+    title: 'Terms of Use | Reclaim Portfolio',
+    description: 'Read the Reclaim Portfolio terms for using the website, submitting case information, creating accounts, and accessing client-facing services.',
+  },
+  privacy: {
+    path: '/privacy-policy',
+    title: 'Privacy Policy | Reclaim Portfolio',
+    description: 'Learn how Reclaim Portfolio collects, uses, protects, and manages information submitted through the website and client-facing services.',
+  },
 };
 
 const privatePages = {

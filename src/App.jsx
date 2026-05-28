@@ -15,6 +15,7 @@ import { CryptoPage } from './pages/CryptoPage.jsx';
 import { HomePage } from './pages/HomePage.jsx';
 import { IntakePage } from './pages/IntakePage.jsx';
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
+import { PrivacyPage, TermsPage } from './pages/PolicyPages.jsx';
 import { PostPage, ResourcesPage } from './pages/ResourcesPage.jsx';
 import { ServicesPage } from './pages/ServicesPage.jsx';
 import { StocksPage } from './pages/StocksPage.jsx';
@@ -32,6 +33,8 @@ const ROUTE_TO_PATH = {
   resources: '/resources',
   contact: '/contact',
   intake: '/intake',
+  terms: '/terms-of-use',
+  privacy: '/privacy-policy',
   admin: '/admin',
   login: '/login',
   signup: '/signup',
@@ -88,6 +91,7 @@ function App(){
     crypto:<CryptoPage/>,stocks:<StocksPage/>,compliance:<CompliancePage/>,
     resources:<ResourcesPage/>,post:<PostPage/>,
     contact:<ContactPage/>,intake:<IntakePage/>,
+    terms:<TermsPage/>,privacy:<PrivacyPage/>,
     login:<AuthPage mode="login"/>,signup:<AuthPage mode="signup"/>,
     'forgot-password':<AuthPage mode="forgot"/>,
     'reset-password':<AuthPage mode="reset"/>,
