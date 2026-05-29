@@ -1788,7 +1788,7 @@ function SwapScreen({ assets = [] }) {
       {error && <div className="portal-inline-error">{error}</div>}
       <section className="swap-shell premium-panel">
         {!fundedAssets.length ? (
-          <EmptyState title="No swap balance" copy="Admin must add balance to one of your wallet assets before swaps can be requested." />
+          <EmptyState title="No swap balance" />
         ) : (
           <div className="swap-form">
             <div className="field">
