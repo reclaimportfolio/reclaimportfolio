@@ -973,12 +973,6 @@ function AssetDetailModal({ asset, onClose, onDeposit, onWithdraw }) {
             <button className="portal-primary" disabled={!hasDepositAddress} onClick={() => onDeposit(asset)}><LuWallet /> Deposit</button>
             <button className="portal-secondary" onClick={() => onWithdraw(asset)}><LuSend /> Withdraw / Send</button>
           </div>
-          {hasDepositAddress && (
-            <div className="security-note">
-              <LuShieldCheck />
-              Wallet addresses shown here are backend-assigned by Reclaim Portfolio administrators.
-            </div>
-          )}
         </aside>
       </div>
     </ModalShell>
@@ -3192,7 +3186,7 @@ function NotificationsScreen() {
 const settingsCards = [
   { id: "profile", title: "Profile settings", copy: "Client and contact details.", icon: LuUserRound },
   { id: "security", title: "Security settings", copy: "Password, MFA, and sessions.", icon: LuKeyRound },
-  { id: "kyc", title: "KYC and compliance", copy: "Identity and authorization status.", icon: LuShieldCheck },
+  { id: "kyc", title: "Verification", copy: "Document status.", icon: LuShieldCheck },
   { id: "notifications", title: "Notifications", copy: "Email and portal alerts.", icon: LuBell },
 ];
 
@@ -3247,7 +3241,7 @@ function SettingsDetail({ type, user, onBack, changePassword, refreshCurrentUser
     try {
       await createDocumentUpload({ client: user, file, category: documentType });
       await refreshCurrentUser?.();
-      setKycNotice(`${documentType} submitted for admin review.`);
+      setKycNotice("Document submitted.");
     } catch (error) {
       setKycError(getErrorMessage(error, `Unable to upload ${documentType}.`));
     } finally {
@@ -3304,17 +3298,11 @@ function SettingsDetail({ type, user, onBack, changePassword, refreshCurrentUser
     return (
       <section className="premium-panel settings-detail">
         <SectionHeader
-          eyebrow="KYC and compliance"
-          title="Identity and authorization status"
+          eyebrow="Verification"
+          title="Document status"
           copy="Upload each documents to have access to the full dashboard."
           action={!kycLocked && <button className="portal-secondary" onClick={onBack}>Back</button>}
         />
-        {kycLocked && (
-          <div className="security-note warning">
-            <LuLockKeyhole />
-            Complete KYC and wait for admin approval before using wallet, swap, reports, and case dashboard features.
-          </div>
-        )}
         <div className="kyc-progress-card">
           <IconTile tone={kycState?.approved ? "accent" : "warning"}><LuShieldCheck /></IconTile>
           <div>
