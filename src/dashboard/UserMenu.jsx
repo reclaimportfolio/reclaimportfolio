@@ -3,7 +3,7 @@ import { useApp } from "../context.js";
 import { Ico } from "../icons.jsx";
 import { useSession } from "../auth/SessionProvider.jsx";
 
-export function UserMenu() {
+export function UserMenu({ onAccountSettings }) {
   const { go } = useApp();
   const { user, logout } = useSession();
   const [open, setOpen] = useState(false);
@@ -43,6 +43,11 @@ export function UserMenu() {
     go("login");
   };
 
+  const openAccountSettings = () => {
+    setOpen(false);
+    onAccountSettings?.();
+  };
+
   return (
     <div
       ref={menuRef}
@@ -62,7 +67,7 @@ export function UserMenu() {
         </span>
       </button>
       <div className={`user-popover ${open ? "open" : ""}`} role="menu" aria-hidden={!open}>
-        <button role="menuitem" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><Ico name="settings" /> Account settings</button>
+        <button role="menuitem" tabIndex={open ? 0 : -1} onClick={openAccountSettings}><Ico name="settings" /> Account settings</button>
         <button className="user-popover-logout" role="menuitem" tabIndex={open ? 0 : -1} onClick={signOut}><Ico name="logout" /> Log out</button>
       </div>
     </div>

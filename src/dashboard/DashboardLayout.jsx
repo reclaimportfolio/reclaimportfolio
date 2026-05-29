@@ -3642,7 +3642,7 @@ export function DashboardLayout() {
           </div>
           <div className="topbar-actions">
             <button className="portal-icon-button" aria-label="Notifications"><LuBell /></button>
-            <UserMenu />
+            <UserMenu onAccountSettings={() => chooseSection("settings")} />
           </div>
         </header>
         <div className="client-body premium-body">
