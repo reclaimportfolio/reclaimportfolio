@@ -1346,11 +1346,25 @@ function OverviewScreen({ setActive, assets, stockAssets = [], onSelect, onSelec
   const [displayCurrency, setDisplayCurrency] = useState(displayCurrencies[0]);
   const [overview, setOverview] = useState({ stats: {}, loading: true, error: "" });
   const recentReports = useCaseReports({ clientId: user?.id, role: "client" }).slice(0, 4);
-  const assignedCryptoHoldings = assets.slice(0, 3);
+  const assetValue = (asset) => {
+    const value = Number(asset?.value || 0);
+    return Number.isFinite(value) ? value : 0;
+  };
+  const assetBalance = (asset) => {
+    const balance = Number(asset?.balance || 0);
+    return Number.isFinite(balance) ? balance : 0;
+  };
+  const sortedCryptoHoldings = [...assets].sort((a, b) => {
+    const valueDelta = assetValue(b) - assetValue(a);
+    if (valueDelta) return valueDelta;
+    return assetBalance(b) - assetBalance(a);
+  });
+  const fundedCryptoHoldings = sortedCryptoHoldings.filter((asset) => assetValue(asset) > 0 || assetBalance(asset) > 0);
+  const defaultCryptoHoldings = sortedCryptoHoldings.filter((asset) => assetValue(asset) <= 0 && assetBalance(asset) <= 0);
   const assignedStockHoldings = stockAssets.slice(0, 3);
-  const totalValue = assignedCryptoHoldings.reduce((sum, asset) => sum + asset.value, 0)
-    + assignedStockHoldings.reduce((sum, asset) => sum + asset.value, 0);
-  const topAssets = assignedCryptoHoldings;
+  const totalValue = assets.reduce((sum, asset) => sum + assetValue(asset), 0)
+    + stockAssets.reduce((sum, asset) => sum + assetValue(asset), 0);
+  const topAssets = [...fundedCryptoHoldings, ...defaultCryptoHoldings].slice(0, 4);
   const convertedTotal = totalValue * displayCurrency.rate;
   useEffect(() => {
     let alive = true;
@@ -3504,6 +3518,10 @@ export function DashboardLayout() {
         || cryptoAssets[0];
       const numericValue = Number(String(assigned.fiatValue).replace(/[^0-9.-]/g, ""));
       const numericAmount = Number(String(assigned.amount).replace(/[^0-9.-]/g, ""));
+      const price = Number(market.price || 0);
+      const currentValue = Number.isFinite(numericValue) && numericValue > 0
+        ? numericValue
+        : Number.isFinite(numericAmount) && numericAmount > 0 && price > 0 ? numericAmount * price : 0;
       return {
         ...market,
         id: assigned.id,
@@ -3513,8 +3531,8 @@ export function DashboardLayout() {
         coingeckoId: market.coingeckoId || market.cgId,
         chartSymbol: market.chartSymbol,
         balance: Number.isFinite(numericAmount) ? numericAmount : 0,
-        value: Number.isFinite(numericValue) ? numericValue : 0,
-        price: market.price || 0,
+        value: currentValue,
+        price,
         change24h: market.change24h || 0,
         marketCap: market.marketCap || 0,
         volume24h: market.volume24h || 0,

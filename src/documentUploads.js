@@ -195,12 +195,12 @@ export function useDocumentUploads({ clientId = "", role = "client", pollMs = 50
   const [uploads, setUploads] = useState([]);
   const refresh = useCallback(async () => {
     try {
-      const rows = await listDocuments();
+      const rows = await listDocuments({ scope: role === "admin" ? "admin" : "client" });
       setUploads(Array.isArray(rows) ? rows.map(normalizeUpload) : []);
     } catch {
       setUploads([]);
     }
-  }, []);
+  }, [role]);
 
   useVisiblePolling(refresh, pollMs);
 
