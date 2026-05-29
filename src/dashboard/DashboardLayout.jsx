@@ -3509,8 +3509,26 @@ export function DashboardLayout() {
     };
   }, [assignedStockSymbolKey]);
 
+  const assignedAssetScore = (asset = {}) => {
+    const value = Number(String(asset.fiatValue ?? asset.fiat_value ?? asset.value ?? "").replace(/[^0-9.-]/g, ""));
+    const amount = Number(String(asset.amount ?? asset.balance ?? "").replace(/[^0-9.-]/g, ""));
+    const updated = new Date(asset.updatedAt || asset.updated_at || 0).getTime();
+    return (Number.isFinite(value) ? value : 0) + (Number.isFinite(amount) ? amount : 0) + (Number.isFinite(updated) ? updated / 10000000000000 : 0);
+  };
+  const dedupeAssignedAssets = (rows) => {
+    const bySymbol = new Map();
+    rows.forEach((asset) => {
+      const key = `${asset.assetType || asset.type || "crypto"}:${String(asset.asset || asset.symbol || "").toUpperCase()}`;
+      const current = bySymbol.get(key);
+      if (!current || assignedAssetScore(asset) >= assignedAssetScore(current)) {
+        bySymbol.set(key, asset);
+      }
+    });
+    return [...bySymbol.values()];
+  };
+
   const dashboardAssets = useMemo(() => {
-    const cryptoAssigned = assignedAssets.filter((asset) => asset.assetType !== "stock" && asset.type !== "stock");
+    const cryptoAssigned = dedupeAssignedAssets(assignedAssets.filter((asset) => asset.assetType !== "stock" && asset.type !== "stock"));
     if (!cryptoAssigned.length) return [];
     return cryptoAssigned.map((assigned) => {
       const market = liveMarket.assets.find((asset) => asset.symbol === assigned.asset)
@@ -3550,8 +3568,7 @@ export function DashboardLayout() {
     });
   }, [assignedAssets, liveMarket.assets]);
   const dashboardStockAssets = useMemo(() => {
-    return assignedAssets
-      .filter((asset) => asset.assetType === "stock" || asset.type === "stock")
+    return dedupeAssignedAssets(assignedAssets.filter((asset) => asset.assetType === "stock" || asset.type === "stock"))
       .map((assigned) => {
         const meta = getStockAssetMeta(assigned.asset);
         const quote = stockQuotesBySymbol.get(assigned.asset);
