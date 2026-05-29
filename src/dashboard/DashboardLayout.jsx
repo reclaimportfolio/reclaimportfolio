@@ -3292,7 +3292,7 @@ function SettingsDetail({ type, user, onBack, changePassword, refreshCurrentUser
         <SectionHeader
           eyebrow="KYC and compliance"
           title="Identity and authorization status"
-          copy="Upload each required compliance file. Admin approval unlocks the full client dashboard."
+          copy="Upload each documents to have access to the full dashboard."
           action={!kycLocked && <button className="portal-secondary" onClick={onBack}>Back</button>}
         />
         {kycLocked && (
