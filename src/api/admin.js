@@ -13,6 +13,7 @@ export const updateAdminNewsletterSubscriber = (subscriberId, payload) => apiReq
 export const getAdminUsers = () => apiRequest("admin/users/", { auth: true, scope: "admin" });
 export const getAdminUserDetail = (userId) => apiRequest(`admin/users/${userId}/`, { auth: true, scope: "admin" });
 export const updateAdminUser = (userId, payload) => apiRequest(`admin/users/${userId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const deleteAdminUser = (userId) => apiRequest(`admin/users/${userId}/`, { method: "DELETE", auth: true, scope: "admin" });
 export const getAdminAssetPrices = () => apiRequest("admin/asset-prices/", { auth: true, scope: "admin" });
 export const getAdminAssets = () => apiRequest("admin/assets/", { auth: true, scope: "admin" });
 export const getAdminUserAssets = (userId) => apiRequest(`admin/users/${userId}/assets/`, { auth: true, scope: "admin" });

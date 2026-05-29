@@ -18,7 +18,7 @@ import {
   updateClientTransaction,
   useClientTransactions,
 } from "../clientTransactions.js";
-import { getAdminAssetPrices, getAdminUsers, requestPasswordReset, updateAdminUser } from "../api.js";
+import { deleteAdminUser, getAdminAssetPrices, getAdminUsers, requestPasswordReset, updateAdminUser } from "../api.js";
 import { getReportStatusLabel, reportStatuses, updateCaseReportReview, useCaseReports } from "../caseReports.js";
 import { documentStatuses, getDocumentLabel, updateDocumentReview, useDocumentUploads } from "../documentUploads.js";
 import { AdminPanel, EmptyAdminState, PageHeader, StatusPill } from "./AdminKit.jsx";
@@ -124,6 +124,7 @@ export function AdminClients() {
   const [modal, setModal] = useState(null);
   const [portalUsers, setPortalUsers] = useState([]);
   const [loadError, setLoadError] = useState("");
+  const [deletingUserId, setDeletingUserId] = useState("");
   const uploadedDocuments = useDocumentUploads({ role: "admin" });
   const adminTransactions = useClientTransactions({ role: "admin" });
   const reports = useCaseReports({ role: "admin" });
@@ -208,6 +209,23 @@ export function AdminClients() {
     if (Object.keys(apiPatch).length) await updateAdminUser(target.id, apiPatch);
     setPortalUsers((current) => current.map((user) => user.id === target.id ? { ...user, ...patch } : user));
   };
+  const deleteUser = async (target = selected) => {
+    if (!target || deletingUserId) return;
+    if (!window.confirm(`Delete ${target.name}? This removes the user account and cannot be undone.`)) return;
+    setDeletingUserId(String(target.id));
+    setLoadError("");
+    try {
+      await deleteAdminUser(target.id);
+      setPortalUsers((current) => current.filter((user) => String(user.id) !== String(target.id)));
+      if (String(selectedId) === String(target.id)) setSelectedId("");
+      setDetailOpen(false);
+      setModal(null);
+    } catch (error) {
+      setLoadError(getErrorMessage(error, "Unable to delete user."));
+    } finally {
+      setDeletingUserId("");
+    }
+  };
 
   if (detailOpen && selected) {
     return (
@@ -218,6 +236,7 @@ export function AdminClients() {
           copy={`${selected.email} - ${selected.phone} - Registered ${selected.createdAt ? new Date(selected.createdAt).toLocaleDateString() : "Not provided"}`}
           action={<button className="admin-small-btn" onClick={() => setDetailOpen(false)}>Back to clients</button>}
         />
+        {loadError && <div className="auth-alert danger" style={{ marginTop: 12 }}>{loadError}</div>}
 
         <section className="admin-grid-2" style={{ marginTop: 14 }}>
           <AdminPanel title="Client details" copy="Manage client profile, assets, wallets, transactions, documents, reports, and internal notes.">
@@ -226,7 +245,7 @@ export function AdminClients() {
                 <button key={tab} className={`admin-small-btn ${activeTab === tab ? "primary" : ""}`} onClick={() => setActiveTab(tab)}>{labelStatus(tab)}</button>
               ))}
             </div>
-            {activeTab === "profile" && <ClientProfileTab client={selected} updateClientMeta={updateClientMeta} />}
+            {activeTab === "profile" && <ClientProfileTab client={selected} updateClientMeta={updateClientMeta} setModal={setModal} deleteUser={deleteUser} deletingUserId={deletingUserId} />}
             {activeTab === "assets" && <AssetsTab client={selected} assets={displayedAssets} transactions={selectedTransactions} setModal={setModal} />}
             {activeTab === "transactions" && <TransactionsTab transactions={selectedTransactions} setModal={setModal} />}
             {activeTab === "wallets" && <WalletsTab client={selected} assets={displayedAssets} setModal={setModal} />}
@@ -247,7 +266,7 @@ export function AdminClients() {
           </AdminPanel>
         </section>
 
-        {modal && <ClientModal modal={modal} client={selected} onClose={() => setModal(null)} updateClientMeta={updateClientMeta} />}
+        {modal && <ClientModal modal={modal} client={selected} onClose={() => setModal(null)} updateClientMeta={updateClientMeta} deleteUser={deleteUser} deletingUserId={deletingUserId} />}
       </div>
     );
   }
@@ -286,6 +305,7 @@ export function AdminClients() {
                       <div className="admin-inline-actions">
                         <button className="admin-small-btn" onClick={() => { setSelectedId(client.id); setActiveTab("profile"); setDetailOpen(true); }}><LuEye /> Open</button>
                         <button className="admin-small-btn" onClick={() => { setSelectedId(client.id); setModal({ type: "send-reset-link", client }); }}>Reset link</button>
+                        <button className="admin-small-btn" onClick={() => deleteUser(client)} disabled={deletingUserId === String(client.id)}><LuTrash2 /> {deletingUserId === String(client.id) ? "Deleting" : "Delete"}</button>
                       </div>
                     </td>
                   </tr>
@@ -297,12 +317,12 @@ export function AdminClients() {
         </div>
       </AdminPanel>
 
-      {modal && selected && <ClientModal modal={modal} client={selected} onClose={() => setModal(null)} updateClientMeta={updateClientMeta} />}
+      {modal && selected && <ClientModal modal={modal} client={selected} onClose={() => setModal(null)} updateClientMeta={updateClientMeta} deleteUser={deleteUser} deletingUserId={deletingUserId} />}
     </div>
   );
 }
 
-function ClientProfileTab({ client, updateClientMeta, setModal }) {
+function ClientProfileTab({ client, updateClientMeta, setModal, deleteUser, deletingUserId }) {
   return (
     <div className="screen-stack">
       <div className="admin-form-grid">
@@ -316,6 +336,7 @@ function ClientProfileTab({ client, updateClientMeta, setModal }) {
       <div className="admin-inline-actions">
         <button className="admin-small-btn primary" onClick={() => setModal?.({ type: "reset-password" })}>Reset password</button>
         <button className="admin-small-btn" onClick={() => setModal?.({ type: "send-reset-link" })}>Send password reset link</button>
+        <button className="admin-small-btn" onClick={() => deleteUser?.(client)} disabled={deletingUserId === String(client.id)}><LuTrash2 /> {deletingUserId === String(client.id) ? "Deleting" : "Delete user"}</button>
       </div>
       <div className="security-note"><LuWallet /> Passwords are never shown here. Client accounts store password hashes only.</div>
     </div>
@@ -442,7 +463,7 @@ function NotesTab({ notes, setModal }) {
   );
 }
 
-function ClientModal({ modal, client, onClose, updateClientMeta }) {
+function ClientModal({ modal, client, onClose, updateClientMeta, deleteUser, deletingUserId }) {
   const title = {
     asset: modal.asset ? "Edit client asset" : modal.assetType === "stock" ? "Add client stock" : "Add client crypto asset",
     "delete-asset": "Remove client asset",
@@ -454,6 +475,7 @@ function ClientModal({ modal, client, onClose, updateClientMeta }) {
     note: "Add internal note",
     "reset-password": "Reset client password",
     "send-reset-link": "Send password reset link",
+    "delete-user": "Delete user account",
   }[modal.type];
   const targetClient = modal.client || client;
   return (
@@ -461,7 +483,7 @@ function ClientModal({ modal, client, onClose, updateClientMeta }) {
       <button className="admin-modal-backdrop" aria-label="Close modal" onClick={onClose} />
       <div className="admin-modal-card">
         <div className="admin-modal-head">
-          <div><span className="eyebrow">{client.name}</span><h3>{title}</h3></div>
+          <div><span className="eyebrow">{targetClient.name}</span><h3>{title}</h3></div>
           <button className="admin-icon-btn" aria-label="Close modal" onClick={onClose}><LuX /></button>
         </div>
         <div className="admin-modal-body">
@@ -475,6 +497,7 @@ function ClientModal({ modal, client, onClose, updateClientMeta }) {
           {modal.type === "note" && <NoteForm client={targetClient} updateClientMeta={updateClientMeta} onClose={onClose} />}
           {modal.type === "reset-password" && <PasswordResetAction client={targetClient} updateClientMeta={updateClientMeta} onClose={onClose} mode="force" />}
           {modal.type === "send-reset-link" && <PasswordResetAction client={targetClient} updateClientMeta={updateClientMeta} onClose={onClose} mode="link" />}
+          {modal.type === "delete-user" && <DeleteUserForm client={targetClient} deleteUser={deleteUser} deletingUserId={deletingUserId} />}
         </div>
         <div className="admin-modal-actions"><button className="admin-small-btn" onClick={onClose}>Close</button></div>
       </div>
@@ -768,6 +791,20 @@ function DeleteTransactionForm({ transaction, onClose }) {
     onClose();
   };
   return <div className="screen-stack"><div className="admin-warning-box"><strong>Delete {transaction?.transactionId}</strong><span>This removes the record from the client dashboard.</span></div><button className="admin-small-btn primary" onClick={remove}>Delete transaction</button></div>;
+}
+
+function DeleteUserForm({ client, deleteUser, deletingUserId }) {
+  return (
+    <div className="screen-stack">
+      <div className="admin-warning-box">
+        <strong>Delete {client?.name}</strong>
+        <span>This removes the user account. Related cases, reports, documents, and support history may remain as unassigned records.</span>
+      </div>
+      <button className="admin-small-btn primary" onClick={() => deleteUser?.(client)} disabled={deletingUserId === String(client?.id)}>
+        <LuTrash2 /> {deletingUserId === String(client?.id) ? "Deleting" : "Delete user"}
+      </button>
+    </div>
+  );
 }
 
 function PasswordResetAction({ client, updateClientMeta, onClose, mode }) {

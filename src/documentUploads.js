@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { createDocument, listDocuments, updateAdminDocument } from "./api.js";
+import { createDocument, deleteAdminDocument, listDocuments, updateAdminDocument } from "./api.js";
 import { useVisiblePolling } from "./utils/useVisiblePolling.js";
 
 const nowIso = () => new Date().toISOString();
@@ -91,15 +91,6 @@ export function getKycState(user, uploads = []) {
   };
 }
 
-function readFileAsDataUrl(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = () => reject(new Error("Unable to read the selected file."));
-    reader.readAsDataURL(file);
-  });
-}
-
 function normalizeUpload(upload) {
   const documentName = clean(upload.documentName || upload.document_name || upload.name || upload.fileName || upload.file_name || "Document");
   const documentType = clean(upload.documentType || upload.document_type || upload.category || "Evidence");
@@ -137,7 +128,6 @@ export async function createDocumentUpload({ client, file, category, caseId }) {
   if (!file) throw new Error("Choose a file before sending.");
   if (!allowedTypes.has(file.type)) throw new Error("Upload a PDF, image, DOC, or DOCX file.");
   if (file.size > maxFileSize) throw new Error("File size must be 10 MB or less.");
-  const fileUrl = await readFileAsDataUrl(file);
   const documentName = clean(file.name);
   const documentType = clean(category) || "Evidence";
   const upload = {
@@ -148,7 +138,6 @@ export async function createDocumentUpload({ client, file, category, caseId }) {
     caseId: clean(caseId) || "Unassigned",
     documentName,
     documentType,
-    fileUrl,
     fileName: documentName,
     fileSize: file.size,
     mimeType: file.type,
@@ -160,16 +149,16 @@ export async function createDocumentUpload({ client, file, category, caseId }) {
     status: "reviewing",
     adminNote: "",
   };
-  const created = await createDocument({
-    case: caseId && /^\d+$/.test(String(caseId)) ? Number(caseId) : null,
-    document_name: upload.documentName,
-    document_type: upload.documentType,
-    file_name: upload.fileName,
-    file_size: upload.fileSize,
-    size: upload.size,
-    mime_type: upload.mimeType,
-    file_url: upload.fileUrl,
-  });
+  const formData = new FormData();
+  if (caseId && /^\d+$/.test(String(caseId))) formData.append("case", String(caseId));
+  formData.append("document_name", upload.documentName);
+  formData.append("document_type", upload.documentType);
+  formData.append("file_name", upload.fileName);
+  formData.append("file_size", String(upload.fileSize));
+  formData.append("size", upload.size);
+  formData.append("mime_type", upload.mimeType);
+  formData.append("file", file, upload.fileName);
+  const created = await createDocument(formData);
   return normalizeUpload({
     ...created,
     clientId: client.id,
@@ -189,6 +178,11 @@ export async function updateDocumentReview({ documentId, status, adminNote = "",
     reviewedAt: nowIso(),
     reviewedBy: clean(reviewedBy) || "Admin",
   });
+}
+
+export async function deleteDocumentUpload(documentId) {
+  await deleteAdminDocument(documentId);
+  return String(documentId);
 }
 
 export function useDocumentUploads({ clientId = "", role = "client", pollMs = 5000 } = {}) {

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
-import { LuCircleAlert, LuDownload, LuEye, LuFileCheck2, LuFileSearch, LuFileText, LuSearch, LuShieldCheck } from "react-icons/lu";
+import { LuCircleAlert, LuDownload, LuEye, LuFileCheck2, LuFileSearch, LuFileText, LuSearch, LuShieldCheck, LuTrash2 } from "react-icons/lu";
 import {
+  deleteDocumentUpload,
   documentStatuses,
   getDocumentLabel,
   updateDocumentReview,
@@ -24,21 +25,24 @@ export function AdminDocuments(){
   const [type,setType]=useState("all");
   const [selected,setSelected]=useState(null);
   const [review,setReview]=useState({ status:"reviewing", adminNote:"" });
+  const [deletedIds,setDeletedIds]=useState(()=>new Set());
+  const [deletingId,setDeletingId]=useState("");
 
-  const documentTypes=useMemo(()=>Array.from(new Set(clientUploads.map((doc)=>doc.documentType))).filter(Boolean),[clientUploads]);
-  const filtered=useMemo(()=>clientUploads.filter((doc)=>{
+  const visibleUploads=useMemo(()=>clientUploads.filter((doc)=>!deletedIds.has(String(doc.id))),[clientUploads,deletedIds]);
+  const documentTypes=useMemo(()=>Array.from(new Set(visibleUploads.map((doc)=>doc.documentType))).filter(Boolean),[visibleUploads]);
+  const filtered=useMemo(()=>visibleUploads.filter((doc)=>{
     const haystack=`${doc.clientName} ${doc.clientEmail} ${doc.documentName} ${doc.documentType} ${doc.statusLabel}`.toLowerCase();
     const matchesQuery=haystack.includes(query.toLowerCase());
     const matchesStatus=status==="all"||doc.status===status;
     const matchesType=type==="all"||doc.documentType===type;
     return matchesQuery&&matchesStatus&&matchesType;
-  }),[clientUploads,query,status,type]);
+  }),[visibleUploads,query,status,type]);
   const counts=useMemo(()=>({
-    total:clientUploads.length,
-    reviewing:clientUploads.filter((doc)=>doc.status==="reviewing").length,
-    verified:clientUploads.filter((doc)=>doc.status==="verified").length,
-    denied:clientUploads.filter((doc)=>doc.status==="denied").length,
-  }),[clientUploads]);
+    total:visibleUploads.length,
+    reviewing:visibleUploads.filter((doc)=>doc.status==="reviewing").length,
+    verified:visibleUploads.filter((doc)=>doc.status==="verified").length,
+    denied:visibleUploads.filter((doc)=>doc.status==="denied").length,
+  }),[visibleUploads]);
 
   const selectDoc=(doc)=>{
     setSelected(doc);
@@ -48,6 +52,17 @@ export function AdminDocuments(){
     if(!selected) return;
     const updated=await updateDocumentReview({ documentId:selected.id, status:review.status, adminNote:review.adminNote, reviewedBy:"Admin" });
     setSelected(updated);
+  };
+  const deleteDoc=async(doc)=>{
+    if(!doc||!window.confirm(`Delete ${doc.documentName}? This removes the uploaded file for admin and client views.`)) return;
+    setDeletingId(String(doc.id));
+    try{
+      await deleteDocumentUpload(doc.id);
+      setDeletedIds((current)=>new Set([...current,String(doc.id)]));
+      if(String(selected?.id)===String(doc.id)) setSelected(null);
+    }finally{
+      setDeletingId("");
+    }
   };
   const summaryCards=[
     { label:"Total Documents", value:counts.total, note:"uploaded records", icon:LuFileText },
@@ -90,6 +105,7 @@ export function AdminDocuments(){
                 <div className="admin-inline-actions">
                   <button disabled={!selected.fileUrl} onClick={()=>openDocument(selected)}><LuEye/> Preview</button>
                   <button disabled={!selected.fileUrl} onClick={()=>downloadDocument(selected)}><LuDownload/> Download</button>
+                  <button onClick={()=>deleteDoc(selected)} disabled={deletingId===String(selected.id)}><LuTrash2/> {deletingId===String(selected.id)?"Deleting":"Delete"}</button>
                 </div>
               </div>
             ) : (
@@ -138,7 +154,7 @@ export function AdminDocuments(){
           </select>
         </div>
         <div className="table-scroll admin-doc-table-scroll"><table><thead><tr><th>Document</th><th>Client</th><th>Case</th><th>Category</th><th>Size</th><th>Uploaded</th><th>Status</th><th>Actions</th></tr></thead><tbody>
-          {filtered.map((doc)=><tr key={doc.id} className={selected?.id===doc.id?"active":""}><td><strong>{doc.documentName}</strong><div className="mono muted" style={{fontSize:11}}>{doc.id}</div></td><td><strong>{doc.clientName}</strong><div className="muted" style={{fontSize:11}}>{doc.clientEmail}</div></td><td className="mono">{doc.caseId}</td><td>{doc.documentType}</td><td>{doc.size}</td><td className="mono muted">{new Date(doc.uploadedAt).toLocaleDateString()}</td><td><StatusPill status={doc.statusLabel}/></td><td><div className="admin-inline-actions"><button onClick={()=>selectDoc(doc)}><LuEye/> Preview</button><button disabled={!doc.fileUrl} onClick={()=>downloadDocument(doc)}><LuDownload/> Download</button><button onClick={()=>selectDoc(doc)}>Review</button></div></td></tr>)}
+          {filtered.map((doc)=><tr key={doc.id} className={selected?.id===doc.id?"active":""}><td><strong>{doc.documentName}</strong><div className="mono muted" style={{fontSize:11}}>{doc.id}</div></td><td><strong>{doc.clientName}</strong><div className="muted" style={{fontSize:11}}>{doc.clientEmail}</div></td><td className="mono">{doc.caseId}</td><td>{doc.documentType}</td><td>{doc.size}</td><td className="mono muted">{new Date(doc.uploadedAt).toLocaleDateString()}</td><td><StatusPill status={doc.statusLabel}/></td><td><div className="admin-inline-actions"><button onClick={()=>selectDoc(doc)}><LuEye/> Preview</button><button disabled={!doc.fileUrl} onClick={()=>downloadDocument(doc)}><LuDownload/> Download</button><button onClick={()=>selectDoc(doc)}>Review</button><button onClick={()=>deleteDoc(doc)} disabled={deletingId===String(doc.id)}><LuTrash2/> {deletingId===String(doc.id)?"Deleting":"Delete"}</button></div></td></tr>)}
         </tbody></table></div>
         <div className="admin-doc-mobile-list">
           {filtered.map((doc)=>(
@@ -153,6 +169,7 @@ export function AdminDocuments(){
                 <button onClick={()=>selectDoc(doc)}><LuEye/> Preview</button>
                 <button disabled={!doc.fileUrl} onClick={()=>downloadDocument(doc)}><LuDownload/> Download</button>
                 <button onClick={()=>selectDoc(doc)}>Review</button>
+                <button onClick={()=>deleteDoc(doc)} disabled={deletingId===String(doc.id)}><LuTrash2/> {deletingId===String(doc.id)?"Deleting":"Delete"}</button>
               </div>
             </article>
           ))}

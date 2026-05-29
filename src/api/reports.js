@@ -11,3 +11,4 @@ export const listDocuments = ({ scope = "client" } = {}) => {
 };
 export const createDocument = (payload) => apiRequest("documents/", { method: "POST", body: payload, auth: true });
 export const updateAdminDocument = (documentId, payload) => apiRequest(`admin/documents/${documentId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const deleteAdminDocument = (documentId) => apiRequest(`admin/documents/${documentId}/`, { method: "DELETE", auth: true, scope: "admin" });
