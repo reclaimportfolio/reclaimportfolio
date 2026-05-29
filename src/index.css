@@ -1516,7 +1516,7 @@ tbody tr:hover{background:var(--glass);}
 .portal-secondary{min-height:38px;padding:0 13px;border:1px solid var(--border);background:var(--glass);color:var(--text);}
 .portal-primary:hover,.portal-secondary:hover,.portal-icon-button:hover{transform:translateY(-1px);}
 .portal-secondary:hover,.portal-icon-button:hover{border-color:var(--accent-2);background:var(--glass-2);}
-.portal-primary:disabled{opacity:.48;cursor:not-allowed;transform:none;}
+.portal-primary:disabled,.portal-secondary:disabled{opacity:.48;cursor:not-allowed;transform:none;color:var(--muted);}
 .portal-icon-button{width:40px;height:40px;border:1px solid var(--border);background:var(--glass);color:var(--muted);}
 @keyframes livePulse{0%,100%{opacity:.45;transform:scale(.86);}50%{opacity:1;transform:scale(1.08);}}
 .dash-icon-tile{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;color:var(--accent-2);background:var(--glass);flex-shrink:0;}

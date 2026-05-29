@@ -145,7 +145,6 @@ const cryptoAssets = [
     value: 29541.58,
     network: "Bitcoin",
     confirmations: "3 confirmations",
-    depositAddress: "bc1q9rp8x0k4assignedbackendvault5h9v2q",
     chartData: [42, 45, 44, 49, 51, 48, 54, 57, 56, 61, 63, 66],
   },
   {
@@ -162,7 +161,6 @@ const cryptoAssets = [
     value: 27472.61,
     network: "Ethereum ERC-20",
     confirmations: "12 confirmations",
-    depositAddress: "0x7f31D6BackendAssignedVault9c4A812b5e",
     chartData: [54, 58, 56, 55, 53, 57, 59, 58, 62, 61, 60, 64],
   },
   {
@@ -179,7 +177,6 @@ const cryptoAssets = [
     value: 18420,
     network: "Ethereum ERC-20",
     confirmations: "12 confirmations",
-    depositAddress: "0x39b8BackendAssignedUSDTDeposit6a14B",
     chartData: [50, 50, 51, 50, 50, 49, 50, 50, 51, 50, 50, 50],
   },
   {
@@ -196,7 +193,6 @@ const cryptoAssets = [
     value: 12650,
     network: "Ethereum ERC-20",
     confirmations: "12 confirmations",
-    depositAddress: "0x68c0BackendAssignedUSDCDepositF04e",
     chartData: [49, 50, 50, 50, 50, 51, 50, 50, 50, 50, 49, 50],
   },
   {
@@ -213,7 +209,6 @@ const cryptoAssets = [
     value: 11290.04,
     network: "BNB Smart Chain BEP-20",
     confirmations: "15 confirmations",
-    depositAddress: "0x9BnbBackendAssignedVaultBEP20a74",
     chartData: [38, 41, 43, 42, 46, 48, 47, 50, 54, 53, 56, 59],
   },
   {
@@ -230,7 +225,6 @@ const cryptoAssets = [
     value: 8879.34,
     network: "Solana",
     confirmations: "Finalized",
-    depositAddress: "9cVSBackendAssignedSolanaVaultQp71n2",
     chartData: [36, 39, 43, 41, 46, 51, 49, 55, 58, 60, 63, 68],
   },
   {
@@ -247,7 +241,6 @@ const cryptoAssets = [
     value: 5185,
     network: "XRP Ledger",
     confirmations: "Validated ledger",
-    depositAddress: "rBackendAssignedXrpVault8PhgM9",
     chartData: [62, 60, 59, 61, 58, 57, 55, 56, 54, 53, 55, 52],
   },
   {
@@ -264,7 +257,6 @@ const cryptoAssets = [
     value: 3024,
     network: "Cardano",
     confirmations: "15 confirmations",
-    depositAddress: "addr1qxBackendAssignedCardanoVault2rny",
     chartData: [44, 45, 43, 46, 48, 47, 49, 51, 50, 52, 54, 55],
   },
   {
@@ -281,7 +273,6 @@ const cryptoAssets = [
     value: 1680,
     network: "Dogecoin",
     confirmations: "20 confirmations",
-    depositAddress: "DBackendAssignedDogeVault7n42P",
     chartData: [58, 56, 55, 52, 54, 51, 49, 48, 50, 47, 46, 44],
   },
   {
@@ -297,7 +288,6 @@ const cryptoAssets = [
     value: 3180.45,
     network: "Avalanche C-Chain",
     confirmations: "Finalized",
-    depositAddress: "0xAvaxBackendAssignedVaultCChain42",
     chartData: [40, 41, 43, 42, 45, 47, 46, 49, 51, 52, 54, 56],
   },
   {
@@ -313,7 +303,6 @@ const cryptoAssets = [
     value: 3702.4,
     network: "Polkadot",
     confirmations: "Finalized",
-    depositAddress: "1DotBackendAssignedVault9wK2",
     chartData: [50, 49, 51, 48, 47, 49, 46, 45, 47, 46, 45, 44],
   },
   {
@@ -329,7 +318,6 @@ const cryptoAssets = [
     value: 3872.4,
     network: "Ethereum ERC-20",
     confirmations: "12 confirmations",
-    depositAddress: "0xLinkBackendAssignedVaultB7c2",
     chartData: [42, 43, 44, 43, 45, 46, 45, 48, 49, 48, 50, 51],
   },
   {
@@ -345,7 +333,6 @@ const cryptoAssets = [
     value: 2138.01,
     network: "Litecoin",
     confirmations: "20 confirmations",
-    depositAddress: "ltc1qBackendAssignedLitecoinVault8x2",
     chartData: [53, 52, 51, 50, 51, 49, 48, 50, 49, 48, 47, 48],
   },
   {
@@ -362,7 +349,6 @@ const cryptoAssets = [
     value: 4278,
     network: "Polygon PoS",
     confirmations: "128 blocks",
-    depositAddress: "0xPolBackendAssignedPolygonVaultb31A",
     chartData: [40, 42, 41, 44, 45, 47, 46, 49, 52, 51, 53, 55],
   },
   {
@@ -379,7 +365,6 @@ const cryptoAssets = [
     value: 1012,
     network: "TRON TRC20",
     confirmations: "19 confirmations",
-    depositAddress: "TTronBackendAssignedVault8k21",
     chartData: [37, 38, 38, 39, 40, 39, 41, 41, 42, 43, 43, 44],
   },
   {
@@ -395,7 +380,6 @@ const cryptoAssets = [
     value: 3351.46,
     network: "Bitcoin Cash",
     confirmations: "15 confirmations",
-    depositAddress: "qBackendAssignedBchVault9f2n",
     chartData: [46, 47, 48, 47, 49, 50, 49, 51, 53, 52, 54, 55],
   },
   {
@@ -411,7 +395,6 @@ const cryptoAssets = [
     value: 3447.6,
     network: "Ethereum ERC-20",
     confirmations: "12 confirmations",
-    depositAddress: "0xUniBackendAssignedVault2a91",
     chartData: [55, 54, 52, 53, 51, 50, 48, 49, 47, 46, 47, 45],
   },
   {
@@ -427,7 +410,6 @@ const cryptoAssets = [
     value: 4015.8,
     network: "Cosmos Hub",
     confirmations: "Finalized",
-    depositAddress: "cosmos1BackendAssignedVault6p9",
     chartData: [41, 41, 42, 43, 42, 44, 45, 44, 46, 47, 46, 48],
   },
   {
@@ -443,7 +425,6 @@ const cryptoAssets = [
     value: 3955.2,
     network: "NEAR",
     confirmations: "Finalized",
-    depositAddress: "nearbackendassignedvault.near",
     chartData: [36, 38, 40, 39, 42, 44, 43, 46, 48, 50, 52, 55],
   },
   {
@@ -459,7 +440,6 @@ const cryptoAssets = [
     value: 3248,
     network: "Arbitrum One",
     confirmations: "Finalized",
-    depositAddress: "0xArbBackendAssignedVault7A1",
     chartData: [49, 48, 50, 47, 46, 48, 45, 44, 46, 45, 44, 43],
   },
 ].map((asset) => ({
@@ -907,7 +887,7 @@ function EmptyState({ icon: Icon = LuCircleAlert, title, copy }) {
     <div className="portal-empty">
       <Icon />
       <strong>{title}</strong>
-      <span>{copy}</span>
+      {copy ? <span>{copy}</span> : null}
     </div>
   );
 }
@@ -949,6 +929,7 @@ function AssetDetailModal({ asset, onClose, onDeposit, onWithdraw }) {
   const value = Number(asset.value) || 0;
   const balance = Number(asset.balance) || 0;
   const positive = change24h >= 0;
+  const hasDepositAddress = Boolean(asset.depositAddress);
 
   return (
     <ModalShell title={`${asset.name || asset.symbol || "Asset"} asset detail`} onClose={onClose}>
@@ -974,7 +955,6 @@ function AssetDetailModal({ asset, onClose, onDeposit, onWithdraw }) {
             {[
               ["Current balance", asset.symbol || "", `${formatNumber(balance)} ${asset.symbol || ""}`, "Open"],
               ["Portfolio value", "", formatCurrency(value), "Final"],
-              ["Admin address assignment", asset.symbol || "", "Backend", "Reviewing"],
             ].map(([label, sym, amount, status]) => (
               <div key={label}>
                 <span><LuReceiptText /> {label}</span>
@@ -990,13 +970,15 @@ function AssetDetailModal({ asset, onClose, onDeposit, onWithdraw }) {
           <div className="kv"><span className="k">Network</span><span className="v">{asset.network || "Not assigned"}</span></div>
           <div className="kv"><span className="k">Confirmations</span><span className="v">{asset.confirmations || "Backend assigned"}</span></div>
           <div className="detail-actions">
-            <button className="portal-primary" onClick={() => onDeposit(asset)}><LuWallet /> Deposit</button>
+            <button className="portal-primary" disabled={!hasDepositAddress} onClick={() => onDeposit(asset)}><LuWallet /> Deposit</button>
             <button className="portal-secondary" onClick={() => onWithdraw(asset)}><LuSend /> Withdraw / Send</button>
           </div>
-          <div className="security-note">
-            <LuShieldCheck />
-            Wallet addresses shown here are backend-assigned by Reclaim Portfolio administrators.
-          </div>
+          {hasDepositAddress && (
+            <div className="security-note">
+              <LuShieldCheck />
+              Wallet addresses shown here are backend-assigned by Reclaim Portfolio administrators.
+            </div>
+          )}
         </aside>
       </div>
     </ModalShell>
@@ -1066,8 +1048,10 @@ function DepositModal({ asset, onClose }) {
   }, [asset?.id, asset?.symbol, asset?.network]);
 
   if (!asset) return null;
+  const hasDepositAddress = Boolean(asset.depositAddress);
 
   const copyAddress = async () => {
+    if (!hasDepositAddress) return;
     try {
       await navigator.clipboard.writeText(asset.depositAddress);
       setCopied(true);
@@ -1121,27 +1105,21 @@ function DepositModal({ asset, onClose }) {
           </div>
         </div>
         <div className="address-box">
-          <span>Backend-assigned deposit address</span>
-          <code>{asset.depositAddress}</code>
+          {hasDepositAddress && <code>{asset.depositAddress}</code>}
           {asset.memoOrTag && (
             <>
               <span>Memo / tag</span>
               <code>{asset.memoOrTag}</code>
             </>
           )}
-          <button className="portal-secondary" onClick={copyAddress}><LuCopy /> {copied ? "Copied" : "Copy address"}</button>
+          <button className="portal-secondary" disabled={!hasDepositAddress} onClick={copyAddress}><LuCopy /> {copied ? "Copied" : "Copy address"}</button>
         </div>
         <ul className="instruction-list">
           <li>Only deposit {asset.symbol} on the {asset.network} network.</li>
           <li>Deposits may require blockchain confirmations before review.</li>
           <li>Sending the wrong asset or network may result in permanent loss.</li>
-          <li>This address is assigned by admin/backend and is not generated in the frontend.</li>
         </ul>
         <div className="send-form">
-          <div className="security-note">
-            <LuCircleAlert />
-            After sending funds, submit the transaction hash for admin review. Deposits are verified manually before approval.
-          </div>
           <div className="field-grid">
             <div className="field">
               <label>Network</label>
@@ -1239,10 +1217,6 @@ function WithdrawModal({ asset, onClose }) {
             <span>Available balance <strong>{formatNumber(asset.balance)} {asset.symbol}</strong></span>
             <span>Estimated fee <strong>{formatCurrency(fee)}</strong></span>
           </div>
-          <div className="security-note warning">
-            <LuCircleAlert />
-            Withdrawals are reviewed for ownership, sanctions, and recovery-case compliance before release.
-          </div>
           <button className="portal-primary" disabled={!canReview} onClick={() => setStep("review")}>
             Review transaction
           </button>
@@ -1326,7 +1300,8 @@ function AssetRow({ asset, onSelect, onDeposit, onWithdraw, compact = false }) {
 function StockAssetRow({ asset, onOpen }) {
   const shares = Number(asset.balance || 0);
   const value = Number(asset.value || 0);
-  const unitPrice = shares > 0 ? value / shares : 0;
+  const quotedPrice = Number(asset.price || 0);
+  const unitPrice = quotedPrice > 0 ? quotedPrice : shares > 0 ? value / shares : 0;
   const openFromKeyboard = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
@@ -1371,15 +1346,11 @@ function OverviewScreen({ setActive, assets, stockAssets = [], onSelect, onSelec
   const [displayCurrency, setDisplayCurrency] = useState(displayCurrencies[0]);
   const [overview, setOverview] = useState({ stats: {}, loading: true, error: "" });
   const recentReports = useCaseReports({ clientId: user?.id, role: "client" }).slice(0, 4);
-  const adminAddedAssets = assets.filter((asset) => {
-    const balance = Number(asset.balance || 0);
-    const value = Number(asset.value || 0);
-    return balance > 0 || value > 0;
-  });
-  const assignedStockHoldings = stockAssets.filter((asset) => Number(asset.balance || 0) > 0 || Number(asset.value || 0) > 0);
-  const totalValue = adminAddedAssets.reduce((sum, asset) => sum + asset.value, 0)
+  const assignedCryptoHoldings = assets.slice(0, 3);
+  const assignedStockHoldings = stockAssets.slice(0, 3);
+  const totalValue = assignedCryptoHoldings.reduce((sum, asset) => sum + asset.value, 0)
     + assignedStockHoldings.reduce((sum, asset) => sum + asset.value, 0);
-  const topAssets = adminAddedAssets.slice(0, 4);
+  const topAssets = assignedCryptoHoldings;
   const convertedTotal = totalValue * displayCurrency.rate;
   useEffect(() => {
     let alive = true;
@@ -1402,7 +1373,7 @@ function OverviewScreen({ setActive, assets, stockAssets = [], onSelect, onSelec
       <section className="portal-kpis">
         {[
           ["Portfolio value", formatDisplayCurrency(convertedTotal, displayCurrency.code), "", LuWallet],
-          ["Total cases", overview.loading ? "..." : stats.total_cases ?? 0, "Backend synced", LuFileText],
+          ["Total cases", overview.loading ? "..." : stats.total_cases ?? 0, "", LuFileText],
           ["Active cases", overview.loading ? "..." : stats.active_cases ?? 0, "In progress", LuChartLine],
           ["Resolved cases", overview.loading ? "..." : stats.resolved_cases ?? 0, "Closed or resolved", LuFileCheck2],
         ].map(([label, value, sub, Icon], index) => (
@@ -1439,7 +1410,7 @@ function OverviewScreen({ setActive, assets, stockAssets = [], onSelect, onSelec
                 <em className="holding-value">{formatCurrency(asset.value)}</em>
               </button>
             ))}
-            {!topAssets.length && <EmptyState title="No admin-added assets" copy="Primary holdings will appear after an admin adds asset balances to your profile." />}
+            {!topAssets.length && <EmptyState title="You have no current holdings" />}
           </div>
         </div>
         <div className="premium-panel">
@@ -1466,7 +1437,7 @@ function OverviewScreen({ setActive, assets, stockAssets = [], onSelect, onSelec
           {assignedStockHoldings.map((asset) => (
             <StockAssetRow key={asset.id || asset.symbol} asset={asset} onOpen={onSelectStock} />
           ))}
-          {!assignedStockHoldings.length && <EmptyState title="No stock holdings assigned" copy="Stock positions will appear after an admin adds them to your portfolio." />}
+          {!assignedStockHoldings.length && <EmptyState title="You have no current holdings" />}
         </div>
       </section>
     </div>
@@ -1641,7 +1612,6 @@ function WalletScreen({ assets, stockAssets = [], onSelect, onSelectStock, onDep
           {assets.map((asset) => (
             <AssetRow key={asset.id || asset.symbol} asset={asset} onSelect={onSelect} onDeposit={onDeposit} onWithdraw={onWithdraw} />
           ))}
-          {!assets.length && <EmptyState title="No assets assigned" copy="Only admin-added assets are shown here." />}
         </div>
       </section>
       <section className="premium-panel">
@@ -1654,7 +1624,6 @@ function WalletScreen({ assets, stockAssets = [], onSelect, onSelectStock, onDep
           {assignedStockHoldings.map((asset) => (
             <StockAssetRow key={asset.id || asset.symbol} asset={asset} onOpen={onSelectStock} />
           ))}
-          {!assignedStockHoldings.length && <EmptyState title="No stock holdings assigned" copy="Assigned stock positions will appear here separately from wallet assets." />}
         </div>
       </section>
       <WalletTransferAssetPicker
@@ -1686,7 +1655,7 @@ function TransactionsScreen() {
               <Badge s={tx.statusLabel} />
             </button>
           ))}
-          {!clientTransactions.length && <EmptyState title="No transactions" copy="Admin-created transaction records will appear here." />}
+          {!clientTransactions.length && <EmptyState title="No transactions" />}
         </div>
       </section>
       {selectedTx && <TransactionDetailModal tx={selectedTx} onClose={() => setSelectedTx(null)} />}
@@ -1796,14 +1765,12 @@ function SwapScreen({ assets = [] }) {
     setNotice("");
     setError("");
     try {
-      const response = await createDashboardSwapRequest({
+      await createDashboardSwapRequest({
         from_asset: from,
         to_asset: to,
         amount,
       });
-      const quote = response?.quote || {};
-      const received = Number(quote.receive_amount || estimate || 0);
-      setNotice(`Swap request submitted for admin review. Estimated receive: ${formatNumber(received)} ${to}.`);
+      setNotice("Swap request submitted");
       setAmount("");
     } catch (error) {
       setError(getErrorMessage(error, "Unable to request swap review."));
@@ -1815,7 +1782,7 @@ function SwapScreen({ assets = [] }) {
   return (
     <div className="screen-stack">
       <div className="swap-section-head">
-        <SectionHeader eyebrow="Compliance-controlled swap" title="Review asset conversion request" />
+        <SectionHeader eyebrow="Swap" title="Review asset conversion request" />
       </div>
       {notice && <div className="portal-inline-state">{notice}</div>}
       {error && <div className="portal-inline-error">{error}</div>}
@@ -1854,7 +1821,7 @@ function SwapScreen({ assets = [] }) {
             <div className="swap-estimate">
               <span>Estimated receive</span>
               <strong>{formatNumber(estimate)} {to}</strong>
-              <small>Estimated value: {formatCurrency(fiatEstimate)}. Admin review required before balances change.</small>
+              <small>Estimated value: {formatCurrency(fiatEstimate)}</small>
             </div>
             <button
               className="portal-primary"
@@ -1870,18 +1837,36 @@ function SwapScreen({ assets = [] }) {
   );
 }
 
-function MarketsScreen({ marketAssets = [], onSelect, onDeposit, onWithdraw }) {
+function MarketsScreen({ marketAssets = [], walletAssets = [], onSelect, onDeposit, onWithdraw }) {
   const [query, setQuery] = useState("");
-  const availableAssets = useMemo(() => (marketAssets.length ? marketAssets : cryptoAssets), [marketAssets]);
+  const availableAssets = useMemo(() => (marketAssets.length ? marketAssets : cryptoAssets).map((asset) => ({
+    ...asset,
+    balance: 0,
+    value: 0,
+    walletAddress: "",
+    depositAddress: "",
+    memoOrTag: "",
+    confirmations: "",
+    adminAssigned: false,
+  })), [marketAssets]);
+  const walletBySymbol = useMemo(() => new Map(
+    walletAssets
+      .filter((asset) => asset.depositAddress)
+      .map((asset) => [asset.symbol, asset]),
+  ), [walletAssets]);
   const [selectedSymbol, setSelectedSymbol] = useState(availableAssets[0]?.symbol || "BTC");
   const filtered = useMemo(
     () => availableAssets.filter((asset) => `${asset.name} ${asset.symbol}`.toLowerCase().includes(query.toLowerCase())),
     [availableAssets, query],
   );
   const selected = availableAssets.find((asset) => asset.symbol === selectedSymbol) || filtered[0] || availableAssets[0];
+  const selectedWallet = selected ? walletBySymbol.get(selected.symbol) : null;
 
   useEffect(() => {
-    if (!availableAssets.length) return;
+    if (!availableAssets.length) {
+      setSelectedSymbol("");
+      return;
+    }
     if (!availableAssets.some((asset) => asset.symbol === selectedSymbol)) {
       setSelectedSymbol(availableAssets[0].symbol);
     }
@@ -1889,7 +1874,6 @@ function MarketsScreen({ marketAssets = [], onSelect, onDeposit, onWithdraw }) {
 
   const chooseMarketAsset = (asset) => {
     setSelectedSymbol(asset.symbol);
-    onSelect(asset);
   };
 
   return (
@@ -1931,9 +1915,9 @@ function MarketsScreen({ marketAssets = [], onSelect, onDeposit, onWithdraw }) {
             </div>
             <CryptoChartDisplay asset={selected} height={340} />
             <div className="detail-actions">
-              <button className="portal-primary" onClick={() => onDeposit(selected)}>Deposit</button>
-              <button className="portal-secondary" onClick={() => onWithdraw(selected)}>Withdraw</button>
-              <button className="portal-secondary" onClick={() => onSelect(selected)}>Details</button>
+              <button className="portal-primary" disabled={!selectedWallet} onClick={() => selectedWallet && onDeposit(selectedWallet)}>Deposit</button>
+              <button className="portal-secondary" disabled={!selectedWallet || Number(selectedWallet.balance || 0) <= 0} onClick={() => selectedWallet && onWithdraw(selectedWallet)}>Withdraw</button>
+              <button className="portal-secondary" onClick={() => onSelect(selectedWallet || selected)}>Details</button>
             </div>
           </aside>
         ) : (
@@ -2228,16 +2212,21 @@ function StockPositionDetailModal({ asset, fundingAssets = [], onClose, onDeposi
   if (!asset) return null;
 
   const shares = Number(asset.balance || 0);
-  const positionPrice = shares > 0 ? Number(asset.value || 0) / shares : 0;
+  const savedValue = Number(asset.value || 0);
+  const savedPositionPrice = shares > 0 ? savedValue / shares : 0;
+  const currentPrice = Number(quote?.price ?? asset.price ?? savedPositionPrice) || 0;
+  const currentValue = shares > 0 && currentPrice > 0 ? shares * currentPrice : savedValue;
+  const currentHolding = { ...asset, price: currentPrice, value: currentValue };
   const stock = {
     ...asset,
     ...quote,
-    holding: asset,
+    holding: currentHolding,
     type: "stock",
     symbol: asset.symbol,
     name: asset.name,
     companyName: asset.companyName || asset.name,
-    price: quote?.price ?? positionPrice,
+    price: currentPrice,
+    value: currentValue,
     chart: quote?.chart || [],
   };
 
@@ -2447,7 +2436,7 @@ function StockSellReviewModal({ stock, onClose, onSubmitted }) {
         <AssetIcon asset={stock} size={42} />
         <div>
           <strong>{stock.symbol} sell request</strong>
-          <p>Enter the shares to sell. Your assigned position stays unchanged until an administrator completes the review.</p>
+          <p>Enter the shares to sell.</p>
         </div>
         <div className="stock-buy-form">
           {error && <div className="portal-inline-error">{error}</div>}
@@ -3477,6 +3466,35 @@ export function DashboardLayout() {
     setWithdrawAsset(asset);
   };
 
+  const assignedStockSymbols = useMemo(() => {
+    return [...new Set(assignedAssets
+      .filter((asset) => asset.assetType === "stock" || asset.type === "stock")
+      .map((asset) => String(asset.asset || asset.symbol || "").trim().toUpperCase())
+      .filter(Boolean))];
+  }, [assignedAssets]);
+  const assignedStockSymbolKey = assignedStockSymbols.join(",");
+  const [stockQuotesBySymbol, setStockQuotesBySymbol] = useState(new Map());
+
+  useEffect(() => {
+    const symbols = assignedStockSymbolKey.split(",").filter(Boolean);
+    if (!symbols.length) {
+      setStockQuotesBySymbol(new Map());
+      return undefined;
+    }
+    let alive = true;
+    fetchStockBatch(symbols, { range: "1D" })
+      .then((payload) => {
+        if (!alive) return;
+        setStockQuotesBySymbol(new Map((payload.stocks || []).map((stock) => [stock.symbol, stock])));
+      })
+      .catch(() => {
+        if (alive) setStockQuotesBySymbol(new Map());
+      });
+    return () => {
+      alive = false;
+    };
+  }, [assignedStockSymbolKey]);
+
   const dashboardAssets = useMemo(() => {
     const cryptoAssigned = assignedAssets.filter((asset) => asset.assetType !== "stock" && asset.type !== "stock");
     if (!cryptoAssigned.length) return [];
@@ -3503,9 +3521,12 @@ export function DashboardLayout() {
         chartData: market.chartData || [],
         confirmations: market.confirmations || "Backend assigned",
         network: assigned.network || market.network,
-        depositAddress: assigned.walletAddress || "No wallet assigned",
+        walletAddress: assigned.walletAddress,
+        depositAddress: assigned.walletAddress || "",
         memoOrTag: assigned.memoOrTag,
         visible: assigned.visible,
+        updatedBy: assigned.updatedBy,
+        isSystemDefault: String(assigned.updatedBy || "").toLowerCase() === "system",
         adminAssigned: true,
       };
     });
@@ -3515,24 +3536,36 @@ export function DashboardLayout() {
       .filter((asset) => asset.assetType === "stock" || asset.type === "stock")
       .map((assigned) => {
         const meta = getStockAssetMeta(assigned.asset);
+        const quote = stockQuotesBySymbol.get(assigned.asset);
         const numericValue = Number(String(assigned.fiatValue).replace(/[^0-9.-]/g, ""));
         const numericAmount = Number(String(assigned.amount).replace(/[^0-9.-]/g, ""));
+        const quotedPrice = Number(quote?.price);
+        const positionPrice = numericAmount > 0 && numericValue > 0 ? numericValue / numericAmount : 0;
+        const currentPrice = Number.isFinite(quotedPrice) && quotedPrice > 0 ? quotedPrice : positionPrice;
+        const currentValue = Number.isFinite(numericAmount) && numericAmount > 0 && currentPrice > 0
+          ? numericAmount * currentPrice
+          : Number.isFinite(numericValue) ? numericValue : 0;
         return {
           ...meta,
+          ...quote,
           id: assigned.id,
           type: "stock",
           symbol: assigned.asset,
           name: assigned.assetName || meta.name,
           companyName: assigned.assetName || meta.name,
           balance: Number.isFinite(numericAmount) ? numericAmount : 0,
-          value: Number.isFinite(numericValue) ? numericValue : 0,
+          value: currentValue,
+          fiatValue: formatCurrency(currentValue),
+          price: currentPrice,
           network: assigned.network || "US Equities",
           label: assigned.label || `${assigned.asset} position`,
           visible: assigned.visible,
+          updatedBy: assigned.updatedBy,
+          isSystemDefault: String(assigned.updatedBy || "").toLowerCase() === "system",
           adminAssigned: true,
         };
       });
-  }, [assignedAssets]);
+  }, [assignedAssets, stockQuotesBySymbol]);
   const kycState = useMemo(() => getKycState(user, clientUploads), [clientUploads, user]);
   const kycLocked = !kycState.approved;
 
@@ -3542,7 +3575,8 @@ export function DashboardLayout() {
     }
   }, [active, kycLocked]);
 
-  const stockFundingAssets = dashboardAssets.filter((asset) => ["USDC", "USDT"].includes(asset.symbol) && Number(asset.balance || 0) > 0);
+  const walletAssets = dashboardAssets.filter((asset) => !asset.isSystemDefault);
+  const stockFundingAssets = walletAssets.filter((asset) => ["USDC", "USDT"].includes(asset.symbol) && Number(asset.balance || 0) > 0);
   const screenProps = {
     assets: dashboardAssets,
     stockAssets: dashboardStockAssets,
@@ -3555,11 +3589,11 @@ export function DashboardLayout() {
   const screens = {
     overview: <OverviewScreen {...screenProps} />,
     "report-case": <ReportCaseScreen />,
-    wallet: <WalletScreen {...screenProps} />,
+    wallet: <WalletScreen {...screenProps} assets={walletAssets} />,
     stocks: <StocksScreen assets={dashboardAssets} stockAssets={dashboardStockAssets} setActive={setActive} />,
     transactions: <TransactionsScreen />,
-    swap: <SwapScreen {...screenProps} />,
-    markets: <MarketsScreen {...screenProps} marketAssets={liveMarket.assets} />,
+    swap: <SwapScreen {...screenProps} assets={walletAssets} />,
+    markets: <MarketsScreen {...screenProps} marketAssets={liveMarket.assets} walletAssets={walletAssets} />,
     support: <SupportScreen />,
     reports: <ReportsScreen />,
     notifications: <NotificationsScreen />,
