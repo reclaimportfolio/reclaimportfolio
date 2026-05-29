@@ -3104,7 +3104,7 @@ function ReportsScreen() {
               <button className="portal-secondary report-export-action" disabled={!report.documents?.length}><LuDownload /> Export</button>
             </div>
           ))}
-          {!clientReports.length && <EmptyState title="No reports yet" copy="Case reports and admin-reviewed exports will appear here." />}
+          {!clientReports.length && <EmptyState title="No reports yet" copy="Case reports and reviewed exports will appear here." />}
         </div>
       </section>
     </div>
