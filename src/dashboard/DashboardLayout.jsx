@@ -1394,14 +1394,29 @@ function OverviewScreen({ setActive, assets, stockAssets = [], onSelect, onSelec
         {[
           ["portfolio-value", `Welcome, ${formattedPortfolioOwnerName}`, formatDisplayCurrency(convertedTotal, displayCurrency.code), "", LuWallet],
           ["total-cases", "Total cases", overview.loading ? "..." : stats.total_cases ?? 0, "", LuFileText],
-          ["active-cases", "Active cases", overview.loading ? "..." : stats.active_cases ?? 0, "In progress", LuChartLine],
-          ["resolved-cases", "Resolved cases", overview.loading ? "..." : stats.resolved_cases ?? 0, "Closed or resolved", LuFileCheck2],
+          ["active-cases", "Active cases", overview.loading ? "..." : stats.active_cases ?? 0, "", LuChartLine],
+          ["resolved-cases", "Resolved cases", overview.loading ? "..." : stats.resolved_cases ?? 0, "", LuFileCheck2],
         ].map(([key, label, value, sub, Icon], index) => (
           <div className={`premium-panel portal-kpi ${index === 0 ? "portal-kpi-wide" : "portal-kpi-clean"}`} key={key}>
             <div className="portal-kpi-copy">
               {index === 0 ? (
                 <div className="portal-kpi-heading">
-                  <IconTile><Icon /></IconTile>
+                  <div className="portal-kpi-heading-top">
+                    <IconTile><Icon /></IconTile>
+                    <select
+                      className="currency-mobile-select"
+                      value={displayCurrency.code}
+                      onChange={(event) => {
+                        const nextCurrency = displayCurrencies.find((currency) => currency.code === event.target.value);
+                        if (nextCurrency) setDisplayCurrency(nextCurrency);
+                      }}
+                      aria-label="Display currency"
+                    >
+                      {displayCurrencies.map((currency) => (
+                        <option key={currency.code} value={currency.code}>{currency.label}</option>
+                      ))}
+                    </select>
+                  </div>
                   <div>
                     <span>{label}</span>
                     <h2>Portfolio Value</h2>
