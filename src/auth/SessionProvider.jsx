@@ -15,10 +15,11 @@ const SessionContext = createContext(null);
 
 function normalizeUser(user) {
   if (!user) return null;
+  const joinedName = `${user.first_name || ""} ${user.last_name || ""}`.trim();
   return {
     ...user,
-    name: user.name || user.full_name || user.username || user.email,
-    fullName: user.full_name || user.name || "",
+    name: user.name || joinedName || user.full_name || user.username || user.email,
+    fullName: joinedName || user.full_name || user.name || "",
     isAdmin: Boolean(["staff", "admin"].includes(user.role)),
   };
 }
@@ -62,7 +63,8 @@ export function SessionProvider({ children }) {
       const response = await registerClient({
         email: form.email.trim().toLowerCase(),
         password: form.password,
-        full_name: form.fullName.trim(),
+        first_name: form.firstName.trim(),
+        last_name: form.lastName.trim(),
         username: form.username.trim(),
         phone: form.phone.trim(),
         address: form.address.trim(),

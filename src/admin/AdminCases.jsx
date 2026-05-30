@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { LuRefreshCw, LuSearch } from "react-icons/lu";
-import { getAdminCases } from "../api.js";
+import { LuRefreshCw, LuSearch, LuTrash2 } from "react-icons/lu";
+import { deleteAdminCase, getAdminCases } from "../api.js";
 import { useApp } from "../context.js";
 import { getErrorMessage } from "../utils/errorMessages.js";
 import { AdminPanel, EmptyAdminState, PageHeader, StatusPill } from "./AdminKit.jsx";
@@ -33,6 +33,7 @@ export function AdminCases() {
   const [priority, setPriority] = useState("All");
   const [cases, setCases] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState(null);
   const [error, setError] = useState("");
 
   const loadCases = useCallback(async () => {
@@ -76,6 +77,20 @@ export function AdminCases() {
     return matchesStatus && matchesPriority && matchesText;
   }), [cases, priority, q, status]);
 
+  const removeCase = async (item) => {
+    if (!window.confirm(`Delete ${item.displayId}? This cannot be undone.`)) return;
+    setDeletingId(item.id);
+    setError("");
+    try {
+      await deleteAdminCase(item.id);
+      setCases((current) => current.filter((caseItem) => caseItem.id !== item.id));
+    } catch (err) {
+      setError(getErrorMessage(err, "Unable to delete case."));
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div>
       <PageHeader
@@ -107,7 +122,20 @@ export function AdminCases() {
                   <td><StatusPill status={item.status} /></td>
                   <td>{item.inv}</td>
                   <td><div className="case-health" style={{ padding: 0, border: 0, background: "transparent" }}><div><i style={{ width: `${[88, 74, 46, 100][index % 4]}%` }} /></div></div></td>
-                  <td><span className="tlink" onClick={() => goAdmin("case-detail", item.id)}>Open</span></td>
+                  <td>
+                    <div className="admin-table-actions">
+                      <button className="admin-icon-btn" type="button" onClick={() => goAdmin("case-detail", item.id)}>Open</button>
+                      <button
+                        className="admin-icon-btn danger"
+                        type="button"
+                        onClick={() => removeCase(item)}
+                        disabled={deletingId === item.id}
+                        aria-label={`Delete ${item.displayId}`}
+                      >
+                        <LuTrash2 /> {deletingId === item.id ? "Deleting" : "Delete"}
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
               {!filtered.length && <tr><td colSpan="10"><EmptyAdminState title={loading ? "Loading cases" : "No cases"} copy={loading ? "Fetching backend cases." : "Case submissions will appear here."} /></td></tr>}

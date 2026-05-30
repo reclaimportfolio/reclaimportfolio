@@ -1092,6 +1092,10 @@ tbody tr:hover{background:var(--glass);}
 .admin-inline-actions{display:flex;gap:8px;flex-wrap:wrap;}
 .admin-inline-actions button,.admin-small-btn{min-height:32px;padding:0 10px;border:1px solid var(--border);border-radius:7px;background:var(--glass);font-size:11px;font-weight:900;}
 .admin-small-btn.primary{background:#C9A55E;color:#0B2426;border-color:#C9A55E;}
+.admin-table-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.admin-table-actions .admin-icon-btn{width:auto;min-width:36px;padding:0 10px;display:inline-flex;gap:6px;font-size:11px;font-weight:900;}
+.admin-icon-btn.danger{border-color:rgba(198,91,91,.38);color:#E0826B;}
+.admin-icon-btn.danger:hover{border-color:rgba(198,91,91,.68);background:rgba(198,91,91,.1);}
 .admin-ticket-layout{display:grid;grid-template-columns:minmax(320px,.85fr) minmax(0,1.45fr);gap:16px;align-items:start;}
 .admin-ticket-filters{display:grid;grid-template-columns:minmax(0,1fr) 130px 130px;gap:9px;margin-bottom:12px;}
 .admin-ticket-filters select,.admin-ticket-controls select{min-height:38px;border:1px solid var(--border);border-radius:8px;background:var(--glass);padding:0 10px;color:var(--text);}
@@ -1531,8 +1535,13 @@ tbody tr:hover{background:var(--glass);}
 .portal-kpi-wide{grid-column:1 / -1;grid-template-columns:minmax(0,1fr) auto;align-items:center;min-height:132px;}
 .portal-kpi-clean{min-height:auto;padding-block:18px;}
 .portal-kpi-copy{display:grid;gap:9px;justify-items:start;}
+.portal-kpi-heading{display:flex;align-items:flex-start;gap:12px;}
+.portal-kpi .portal-kpi-heading span{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);}
+.portal-kpi-heading h2{margin-top:6px;font-size:clamp(1.45rem,2.15vw,2rem);letter-spacing:-.025em;}
 .portal-kpi span{font-size:12px;color:var(--muted);}
 .portal-kpi-wide .portal-kpi-copy > span{font-size:clamp(1.65rem,3vw,2.65rem);font-weight:950;line-height:1;color:var(--text);letter-spacing:-.04em;}
+.portal-kpi .portfolio-owner-name{font:inherit;color:var(--accent);}
+.transaction-list .portfolio-owner-name{color:var(--accent);}
 .portal-kpi strong{font-size:clamp(1.2rem,1.65vw,1.58rem);line-height:1.08;letter-spacing:-.03em;}
 .portal-kpi-wide strong{font-size:clamp(2rem,4vw,3.4rem);text-align:right;color:var(--accent);}
 .portal-kpi-clean strong{font-size:clamp(1.05rem,1.8vw,1.35rem);color:var(--text);}

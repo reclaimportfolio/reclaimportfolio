@@ -4,6 +4,7 @@ export const getAdminOverview = () => apiRequest("admin/overview/", { auth: true
 export const getAdminCases = () => apiRequest("admin/cases/", { auth: true, scope: "admin" });
 export const getAdminCase = (caseId) => apiRequest(`admin/cases/${caseId}/`, { auth: true, scope: "admin" });
 export const updateAdminCase = (caseId, payload) => apiRequest(`admin/cases/${caseId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });
+export const deleteAdminCase = (caseId) => apiRequest(`admin/cases/${caseId}/`, { method: "DELETE", auth: true, scope: "admin" });
 export const getAdminMessages = () => apiRequest("admin/messages/", { auth: true, scope: "admin" });
 export const getAdminMessage = (messageId) => apiRequest(`admin/messages/${messageId}/`, { auth: true, scope: "admin" });
 export const updateAdminMessage = (messageId, payload) => apiRequest(`admin/messages/${messageId}/`, { method: "PATCH", body: payload, auth: true, scope: "admin" });

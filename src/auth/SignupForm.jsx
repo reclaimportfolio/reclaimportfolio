@@ -4,11 +4,12 @@ import { Btn } from "../ui.jsx";
 import { useSession } from "./SessionProvider.jsx";
 import { getErrorMessage, getFieldErrors } from "../utils/errorMessages.js";
 
-const initial = { fullName: "", email: "", phone: "", address: "", username: "", password: "", confirmPassword: "", accept: false };
+const initial = { firstName: "", lastName: "", email: "", phone: "", address: "", username: "", password: "", confirmPassword: "", accept: false };
 
 function validate(form) {
   const errors = {};
-  if (!form.fullName.trim()) errors.fullName = "Full name is required.";
+  if (!form.firstName.trim()) errors.firstName = "First name is required.";
+  if (!form.lastName.trim()) errors.lastName = "Last name is required.";
   if (!/^[^@]+@[^@]+\.[^@]+$/.test(form.email)) errors.email = "Enter a valid email address.";
   if (!form.phone.trim()) errors.phone = "Phone number is required.";
   if (!form.address.trim()) errors.address = "Address is required.";
@@ -44,10 +45,12 @@ export function SignupForm({ onSuccess, compact = false, switchToLogin }) {
       window.setTimeout(() => onSuccess?.(), 420);
     } catch (err) {
       const backendFields = getFieldErrors(err);
+      const fullNameError = backendFields.full_name;
       setErrors((current) => ({
         ...current,
         ...backendFields,
-        fullName: backendFields.full_name || current.fullName,
+        firstName: backendFields.first_name || fullNameError || current.firstName,
+        lastName: backendFields.last_name || fullNameError || current.lastName,
       }));
       setStatus(getErrorMessage(err, "Unable to create your account."));
     } finally {
@@ -59,15 +62,21 @@ export function SignupForm({ onSuccess, compact = false, switchToLogin }) {
     <form className="auth-form" onSubmit={submit}>
       <div className="auth-field-grid">
         <div className="field">
-          <label>Full Name <span className="req">*</span></label>
-          <input className={`input ${errors.fullName ? "input-invalid" : ""}`} value={form.fullName} onChange={(event) => set("fullName", event.target.value)} autoComplete="name" />
-          {errors.fullName && <div className="field-err">{errors.fullName}</div>}
+          <label>First Name <span className="req">*</span></label>
+          <input className={`input ${errors.firstName ? "input-invalid" : ""}`} value={form.firstName} onChange={(event) => set("firstName", event.target.value)} autoComplete="given-name" />
+          {errors.firstName && <div className="field-err">{errors.firstName}</div>}
         </div>
         <div className="field">
-          <label>Username <span className="req">*</span></label>
-          <input className={`input ${errors.username ? "input-invalid" : ""}`} value={form.username} onChange={(event) => set("username", event.target.value)} autoComplete="username" />
-          {errors.username && <div className="field-err">{errors.username}</div>}
+          <label>Last Name <span className="req">*</span></label>
+          <input className={`input ${errors.lastName ? "input-invalid" : ""}`} value={form.lastName} onChange={(event) => set("lastName", event.target.value)} autoComplete="family-name" />
+          {errors.lastName && <div className="field-err">{errors.lastName}</div>}
         </div>
+      </div>
+
+      <div className="field">
+        <label>Username <span className="req">*</span></label>
+        <input className={`input ${errors.username ? "input-invalid" : ""}`} value={form.username} onChange={(event) => set("username", event.target.value)} autoComplete="username" />
+        {errors.username && <div className="field-err">{errors.username}</div>}
       </div>
 
       <div className="field">

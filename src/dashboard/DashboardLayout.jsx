@@ -102,6 +102,9 @@ const formatDisplayCurrency = (value, currency = "USD") =>
 const formatNumber = (value) =>
   new Intl.NumberFormat("en-US", { maximumFractionDigits: 6 }).format(value);
 
+const formatDisplayName = (name = "Client") =>
+  String(name || "Client").replace(/\S+/g, (word) => `${word.charAt(0).toUpperCase()}${word.slice(1).toLowerCase()}`);
+
 const formatCompactNumber = (value) => {
   const number = Number(value);
   if (!Number.isFinite(number)) return "N/A";
@@ -923,6 +926,7 @@ function ModalShell({ title, children, onClose }) {
 }
 
 function AssetDetailModal({ asset, onClose, onDeposit, onWithdraw }) {
+  const { user } = useSession();
   if (!asset) return null;
   const change24h = Number(asset.change24h) || 0;
   const price = Number(asset.price) || 0;
@@ -930,6 +934,12 @@ function AssetDetailModal({ asset, onClose, onDeposit, onWithdraw }) {
   const balance = Number(asset.balance) || 0;
   const positive = change24h >= 0;
   const hasDepositAddress = Boolean(asset.depositAddress);
+  const portfolioOwnerName = formatDisplayName(user?.name || user?.username || "Client");
+  const portfolioValueLabel = (
+    <>
+      <span className="portfolio-owner-name">{portfolioOwnerName}</span> Portfolio Value
+    </>
+  );
 
   return (
     <ModalShell title={`${asset.name || asset.symbol || "Asset"} asset detail`} onClose={onClose}>
@@ -953,10 +963,10 @@ function AssetDetailModal({ asset, onClose, onDeposit, onWithdraw }) {
           <CryptoChartDisplay asset={asset} height={360} />
           <div className="transaction-list">
             {[
-              ["Current balance", asset.symbol || "", `${formatNumber(balance)} ${asset.symbol || ""}`, "Open"],
-              ["Portfolio value", "", formatCurrency(value), "Final"],
-            ].map(([label, sym, amount, status]) => (
-              <div key={label}>
+              ["current-balance", "Current balance", asset.symbol || "", `${formatNumber(balance)} ${asset.symbol || ""}`, "Open"],
+              ["portfolio-value", portfolioValueLabel, "", formatCurrency(value), "Final"],
+            ].map(([key, label, sym, amount, status]) => (
+              <div key={key}>
                 <span><LuReceiptText /> {label}</span>
                 <strong>{amount} {sym}</strong>
                 <Badge s={status} />
@@ -1360,6 +1370,8 @@ function OverviewScreen({ setActive, assets, stockAssets = [], onSelect, onSelec
     + stockAssets.reduce((sum, asset) => sum + assetValue(asset), 0);
   const topAssets = [...fundedCryptoHoldings, ...defaultCryptoHoldings].slice(0, 4);
   const convertedTotal = totalValue * displayCurrency.rate;
+  const portfolioOwnerName = user?.name || user?.username || "Client";
+  const formattedPortfolioOwnerName = formatDisplayName(portfolioOwnerName);
   useEffect(() => {
     let alive = true;
     async function loadOverview() {
@@ -1380,15 +1392,27 @@ function OverviewScreen({ setActive, assets, stockAssets = [], onSelect, onSelec
     <div className="screen-stack">
       <section className="portal-kpis">
         {[
-          ["Portfolio value", formatDisplayCurrency(convertedTotal, displayCurrency.code), "", LuWallet],
-          ["Total cases", overview.loading ? "..." : stats.total_cases ?? 0, "", LuFileText],
-          ["Active cases", overview.loading ? "..." : stats.active_cases ?? 0, "In progress", LuChartLine],
-          ["Resolved cases", overview.loading ? "..." : stats.resolved_cases ?? 0, "Closed or resolved", LuFileCheck2],
-        ].map(([label, value, sub, Icon], index) => (
-          <div className={`premium-panel portal-kpi ${index === 0 ? "portal-kpi-wide" : "portal-kpi-clean"}`} key={label}>
+          ["portfolio-value", `Welcome, ${formattedPortfolioOwnerName}`, formatDisplayCurrency(convertedTotal, displayCurrency.code), "", LuWallet],
+          ["total-cases", "Total cases", overview.loading ? "..." : stats.total_cases ?? 0, "", LuFileText],
+          ["active-cases", "Active cases", overview.loading ? "..." : stats.active_cases ?? 0, "In progress", LuChartLine],
+          ["resolved-cases", "Resolved cases", overview.loading ? "..." : stats.resolved_cases ?? 0, "Closed or resolved", LuFileCheck2],
+        ].map(([key, label, value, sub, Icon], index) => (
+          <div className={`premium-panel portal-kpi ${index === 0 ? "portal-kpi-wide" : "portal-kpi-clean"}`} key={key}>
             <div className="portal-kpi-copy">
-              <IconTile><Icon /></IconTile>
-              <span>{label}</span>
+              {index === 0 ? (
+                <div className="portal-kpi-heading">
+                  <IconTile><Icon /></IconTile>
+                  <div>
+                    <span>{label}</span>
+                    <h2>Portfolio Value</h2>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <IconTile><Icon /></IconTile>
+                  <span>{label}</span>
+                </>
+              )}
               {sub && <small>{sub}</small>}
               {index === 0 && <div className="currency-switcher" aria-label="Display currency">
                 {displayCurrencies.map((currency)=>(
