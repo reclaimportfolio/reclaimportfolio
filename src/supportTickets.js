@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import {
   createSupportTicket,
+  deleteSupportTicket,
   listSupportTickets,
   listTicketMessages,
   markSupportTicketRead,
@@ -107,6 +108,12 @@ export async function updateTicket({ ticketId, status, assignedTo }) {
   }
   const updated = await updateSupportTicket(ticketId, payload);
   return normalizeTicket(updated);
+}
+
+export async function deleteTicket(ticketId) {
+  if (!ticketId) throw new Error("Ticket ID is required.");
+  await deleteSupportTicket(ticketId);
+  return true;
 }
 
 export function useTicketStore({ role = "client", clientId = "", pollMs = 5000 } = {}) {

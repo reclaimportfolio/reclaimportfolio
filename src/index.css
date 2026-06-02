@@ -1105,8 +1105,10 @@ tbody tr:hover{background:var(--glass);}
 .admin-ticket-item span{display:block;margin-top:4px;color:var(--muted);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .admin-ticket-item em{width:24px;height:24px;display:grid;place-items:center;border-radius:999px;background:#C9A55E;color:#0B2426;font-size:11px;font-style:normal;font-weight:950;}
 .admin-ticket-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:12px;}
-.admin-ticket-controls{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:12px;}
+.admin-ticket-controls{display:grid;grid-template-columns:1fr 1fr auto auto;gap:10px;align-items:end;margin-bottom:12px;}
 .admin-ticket-controls label{display:grid;gap:6px;color:var(--muted);font-size:11px;font-weight:900;}
+.admin-small-btn.danger{border-color:rgba(198,91,91,.42);background:rgba(198,91,91,.1);color:#E0826B;}
+.admin-small-btn.danger:hover{border-color:rgba(198,91,91,.72);background:rgba(198,91,91,.16);color:#F0A08A;}
 .admin-ticket-reply{margin-top:12px;}
 .admin-icon-btn{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--border);border-radius:9px;background:var(--glass);color:var(--text);}
 .admin-modal{position:fixed;inset:0;z-index:700;display:grid;place-items:center;padding:24px;}

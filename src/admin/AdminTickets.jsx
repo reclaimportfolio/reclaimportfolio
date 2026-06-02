@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { LuSearch, LuSend } from "react-icons/lu";
+import { LuSearch, LuSend, LuTrash2 } from "react-icons/lu";
 import { getAdminUsers } from "../api.js";
 import {
   markTicketRead,
+  deleteTicket,
   priorityLabels,
   sendTicketMessage,
   statusLabels,
@@ -24,6 +25,7 @@ export function AdminTickets() {
   const [priority, setPriority] = useState("all");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const [actionError, setActionError] = useState("");
 
   const filtered = useMemo(() => {
     return tickets.filter((ticket) => {
@@ -58,6 +60,19 @@ export function AdminTickets() {
     markTicketRead(selected.id, "admin").then(refresh).catch(() => {});
   }, [refresh, selected?.id, selectedMessages.length]);
 
+  const removeTicket = async (ticket) => {
+    if (!ticket?.id) return;
+    if (!window.confirm(`Delete ticket "${ticket.title}"? This cannot be undone.`)) return;
+    setActionError("");
+    try {
+      await deleteTicket(ticket.id);
+      setSelectedId(null);
+      await refresh();
+    } catch (err) {
+      setActionError(getErrorMessage(err, "Unable to delete ticket."));
+    }
+  };
+
   return (
     <div>
       <PageHeader
@@ -68,6 +83,7 @@ export function AdminTickets() {
       <section className="admin-ticket-layout">
         <AdminPanel title="Ticket queue" copy={`${filtered.length} matching tickets`}>
           {error && <div className="portal-inline-error">{error}</div>}
+          {actionError && <div className="portal-inline-error">{actionError}</div>}
           <div className="admin-ticket-filters">
             <div className="search-box"><LuSearch /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search client, email, or title..." /></div>
             <select value={status} onChange={(event) => setStatus(event.target.value)}>
@@ -96,7 +112,7 @@ export function AdminTickets() {
         </AdminPanel>
 
         {selected ? (
-          <AdminTicketDetail ticket={selected} messages={selectedMessages} staffUsers={staffUsers} onRefresh={refresh} />
+          <AdminTicketDetail ticket={selected} messages={selectedMessages} staffUsers={staffUsers} onRefresh={refresh} onDelete={removeTicket} />
         ) : (
           <AdminPanel><EmptyAdminState title="No ticket selected" copy="Choose a ticket to open the support conversation." /></AdminPanel>
         )}
@@ -105,7 +121,7 @@ export function AdminTickets() {
   );
 }
 
-function AdminTicketDetail({ ticket, messages, staffUsers, onRefresh }) {
+function AdminTicketDetail({ ticket, messages, staffUsers, onRefresh, onDelete }) {
   const [draft, setDraft] = useState("");
   const [error, setError] = useState("");
   const [status, setStatus] = useState(ticket.status);
@@ -123,6 +139,7 @@ function AdminTicketDetail({ ticket, messages, staffUsers, onRefresh }) {
 
   const [saving, setSaving] = useState(false);
   const [sending, setSending] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const saveControls = async () => {
     setSaving(true);
@@ -154,6 +171,14 @@ function AdminTicketDetail({ ticket, messages, staffUsers, onRefresh }) {
       setSending(false);
     }
   };
+  const remove = async () => {
+    setDeleting(true);
+    try {
+      await onDelete?.(ticket);
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   return (
     <AdminPanel title={ticket.title} copy={`${ticket.id} - updated ${formatTicketTime(ticket.updatedAt)}`}>
@@ -169,6 +194,7 @@ function AdminTicketDetail({ ticket, messages, staffUsers, onRefresh }) {
         <label>Status<select value={status} onChange={(event) => setStatus(event.target.value)}>{ticketStatuses.map((item) => <option key={item} value={item}>{statusLabels[item]}</option>)}</select></label>
         <label>Assign to<select value={assignedTo} onChange={(event) => setAssignedTo(event.target.value)}><option value="">Unassigned</option>{staffUsers.map((member) => <option key={member.id} value={member.id}>{member.full_name || member.email}</option>)}</select></label>
         <button className="admin-small-btn primary" onClick={saveControls} disabled={saving}>{saving ? "Saving..." : "Save"}</button>
+        <button className="admin-small-btn danger" onClick={remove} disabled={deleting}><LuTrash2 /> {deleting ? "Deleting..." : "Delete"}</button>
       </div>
       <div className="admin-ticket-chat">
         {messages.length ? messages.map((message) => <AdminTicketMessage key={message.id} message={message} />) : <EmptyAdminState title="No messages" copy="Client and admin messages will appear here." />}
