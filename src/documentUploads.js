@@ -22,10 +22,8 @@ export const documentStatusLabels = {
 
 export const documentStatuses = Object.keys(documentStatusLabels);
 export const kycRequiredDocumentTypes = [
-  "Government ID",
-  "Proof of address",
-  "Wallet ownership proof",
-  "Recovery authorization",
+  "Government ID Front",
+  "Government ID Back",
 ];
 
 const normalizeKycKey = (value = "") => String(value).toLowerCase().replace(/[^a-z0-9]/g, "");

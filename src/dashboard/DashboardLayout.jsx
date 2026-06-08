@@ -3339,7 +3339,7 @@ function SettingsDetail({ type, user, onBack, changePassword, refreshCurrentUser
         <SectionHeader
           eyebrow="Verification"
           title="Document status"
-          copy="Upload each documents to have access to the full dashboard."
+          copy="Upload the front and back of your government ID to access the full dashboard."
           action={!kycLocked && <button className="portal-secondary" onClick={onBack}>Back</button>}
         />
         <div className="kyc-progress-card">
@@ -3347,7 +3347,7 @@ function SettingsDetail({ type, user, onBack, changePassword, refreshCurrentUser
           <div>
             <span>Verification status</span>
             <strong>{kycState?.statusLabel || "Unverified"}</strong>
-            <p>{kycState?.verifiedCount || 0} of {kycState?.requiredCount || 4} required documents approved.</p>
+            <p>{kycState?.verifiedCount || 0} of {kycState?.requiredCount || 2} government ID files approved.</p>
           </div>
         </div>
         {kycNotice && <div className="portal-inline-state">{kycNotice}</div>}
