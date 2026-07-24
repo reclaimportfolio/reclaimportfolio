@@ -1089,8 +1089,7 @@ function DepositModal({ asset, onClose }) {
       {reviewTx ? (
         <div className="review-step">
           <IconTile tone="accent"><LuShieldCheck /></IconTile>
-          <h4>Deposit pending review</h4>
-          <p className="muted">Your transaction hash has been submitted. Admin will verify the blockchain payment before manually crediting or approving the deposit.</p>
+          <h4>Deposit pending</h4>
           <div className="kv"><span className="k">Request ID</span><span className="v mono">{reviewTx.transactionId || reviewTx.transaction_id}</span></div>
           <div className="kv"><span className="k">Status</span><span className="v"><Badge s={reviewTx.statusLabel || "Pending"} /></span></div>
           <div className="kv"><span className="k">Amount</span><span className="v">{form.amount} {asset.symbol}</span></div>
@@ -1243,15 +1242,14 @@ function WithdrawModal({ asset, onClose }) {
       ) : (
         <div className="review-step">
           <IconTile tone="accent"><LuShieldCheck /></IconTile>
-          <h4>Withdrawal pending review</h4>
-          <p className="muted">Your withdrawal request has been logged for admin compliance review. Payment is released manually only after ownership and case checks are complete.</p>
+          <h4>Withdrawal pending</h4>
           <div className="kv"><span className="k">Request ID</span><span className="v mono">{requestTx?.transactionId || requestTx?.transaction_id || "Pending"}</span></div>
           <div className="kv"><span className="k">Status</span><span className="v"><Badge s={requestTx?.statusLabel || "Pending"} /></span></div>
           <div className="kv"><span className="k">Amount</span><span className="v">{form.amount} {asset.symbol}</span></div>
           <div className="kv"><span className="k">Recipient</span><span className="v mono">{form.address}</span></div>
           <div className="security-note">
             <LuCircleAlert />
-            The request will appear in your transaction history as pending while the admin team reviews it.
+            The request will appear in your transaction history as pending.
           </div>
           <div className="modal-actions">
             <button className="portal-primary" onClick={onClose}>Done</button>
@@ -3339,7 +3337,7 @@ function SettingsDetail({ type, user, onBack, changePassword, refreshCurrentUser
         <SectionHeader
           eyebrow="Verification"
           title="Document status"
-          copy="Upload the front and back of your government ID to access the full dashboard."
+          copy="Upload the front and back of your ID to access the full dashboard."
           action={!kycLocked && <button className="portal-secondary" onClick={onBack}>Back</button>}
         />
         <div className="kyc-progress-card">
@@ -3347,7 +3345,7 @@ function SettingsDetail({ type, user, onBack, changePassword, refreshCurrentUser
           <div>
             <span>Verification status</span>
             <strong>{kycState?.statusLabel || "Unverified"}</strong>
-            <p>{kycState?.verifiedCount || 0} of {kycState?.requiredCount || 2} government ID files approved.</p>
+            <p>{kycState?.verifiedCount || 0} of {kycState?.requiredCount || 2} ID files approved.</p>
           </div>
         </div>
         {kycNotice && <div className="portal-inline-state">{kycNotice}</div>}
