@@ -20,7 +20,7 @@ export function StocksPage(){
               <h2 className="section-title two-line-title">{page.intelTitle}</h2>
               <p className="section-copy">{page.intelText}</p>
               <div className="stocks-actions">
-                <Btn primary icon="arrow" onClick={()=>go('intake')}>{page.primaryCta}</Btn>
+                <Btn primary icon="arrow" onClick={()=>go('signup')}>{page.primaryCta}</Btn>
                 <Btn icon="arrow" onClick={()=>go('contact')}>{page.secondaryCta}</Btn>
               </div>
             </Reveal>

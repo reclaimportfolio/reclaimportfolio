@@ -69,7 +69,7 @@ export function Footer(){
 
             <div className="footer-column footer-action-column">
               <h5>Access</h5>
-              <button className="footer-pill primary" onClick={()=>go('intake')}>{t('common.startRecovery')}</button>
+              <button className="footer-pill primary" onClick={()=>go('signup')}>{t('common.startRecovery')}</button>
               <div className="footer-legal-stack">
                 <button onClick={()=>go('terms')}>Terms of Use</button>
                 <button onClick={()=>go('privacy')}>Privacy Policy</button>

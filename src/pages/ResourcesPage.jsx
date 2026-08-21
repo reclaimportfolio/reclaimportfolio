@@ -122,7 +122,7 @@ export function PostPage(){
           ))}
           <div className="divider" style={{margin:'30px 0'}}/>
           <p className="muted" style={{fontSize:12.5,lineHeight:1.7}}>{t('pages.resources.disclaimer')}</p>
-          <div style={{marginTop:30}}><Btn primary icon="arrow" onClick={()=>go('intake')}>{t('pages.resources.review')}</Btn></div>
+          <div style={{marginTop:30}}><Btn primary icon="arrow" onClick={()=>go('signup')}>{t('pages.resources.review')}</Btn></div>
         </div>
       </section>
     </main>
