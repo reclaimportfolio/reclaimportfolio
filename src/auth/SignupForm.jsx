@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 import { useApp } from "../context.js";
 import { Btn } from "../ui.jsx";
 import { useSession } from "./SessionProvider.jsx";
@@ -28,6 +29,8 @@ export function SignupForm({ onSuccess, compact = false, switchToLogin }) {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const set = (key, value) => setForm((valueMap) => ({ ...valueMap, [key]: value }));
 
@@ -101,12 +104,22 @@ export function SignupForm({ onSuccess, compact = false, switchToLogin }) {
       <div className="auth-field-grid">
         <div className="field">
           <label>Password <span className="req">*</span></label>
-          <input className={`input ${errors.password ? "input-invalid" : ""}`} type="password" value={form.password} onChange={(event) => set("password", event.target.value)} autoComplete="new-password" />
+          <div className={`auth-password-field ${errors.password ? "input-invalid" : ""}`}>
+            <input className="input" type={showPassword ? "text" : "password"} value={form.password} onChange={(event) => set("password", event.target.value)} autoComplete="new-password" />
+            <button type="button" className="auth-password-toggle" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? "Hide password" : "Show password"}>
+              {showPassword ? <LuEyeOff /> : <LuEye />}
+            </button>
+          </div>
           {errors.password && <div className="field-err">{errors.password}</div>}
         </div>
         <div className="field">
           <label>Confirm Password <span className="req">*</span></label>
-          <input className={`input ${errors.confirmPassword ? "input-invalid" : ""}`} type="password" value={form.confirmPassword} onChange={(event) => set("confirmPassword", event.target.value)} autoComplete="new-password" />
+          <div className={`auth-password-field ${errors.confirmPassword ? "input-invalid" : ""}`}>
+            <input className="input" type={showConfirmPassword ? "text" : "password"} value={form.confirmPassword} onChange={(event) => set("confirmPassword", event.target.value)} autoComplete="new-password" />
+            <button type="button" className="auth-password-toggle" onClick={() => setShowConfirmPassword((value) => !value)} aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}>
+              {showConfirmPassword ? <LuEyeOff /> : <LuEye />}
+            </button>
+          </div>
           {errors.confirmPassword && <div className="field-err">{errors.confirmPassword}</div>}
         </div>
       </div>

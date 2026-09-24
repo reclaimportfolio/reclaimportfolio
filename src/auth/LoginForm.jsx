@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 import { useApp } from "../context.js";
 import { Btn } from "../ui.jsx";
 import { useSession } from "./SessionProvider.jsx";
@@ -13,6 +14,7 @@ export function LoginForm({ onSuccess, compact = false, switchToSignup }) {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const set = (key, value) => setForm((valueMap) => ({ ...valueMap, [key]: value }));
 
@@ -48,7 +50,12 @@ export function LoginForm({ onSuccess, compact = false, switchToSignup }) {
 
       <div className="field">
         <label>Password <span className="req">*</span></label>
-        <input className={`input ${errors.password ? "input-invalid" : ""}`} type="password" value={form.password} onChange={(event) => set("password", event.target.value)} autoComplete="current-password" />
+        <div className={`auth-password-field ${errors.password ? "input-invalid" : ""}`}>
+          <input className="input" type={showPassword ? "text" : "password"} value={form.password} onChange={(event) => set("password", event.target.value)} autoComplete="current-password" />
+          <button type="button" className="auth-password-toggle" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? "Hide password" : "Show password"}>
+            {showPassword ? <LuEyeOff /> : <LuEye />}
+          </button>
+        </div>
         {errors.password && <div className="field-err">{errors.password}</div>}
       </div>
 

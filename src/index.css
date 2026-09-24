@@ -1364,6 +1364,12 @@ tbody tr:hover{background:var(--glass);}
 .auth-form{display:grid;gap:18px;}
 .auth-form .field{margin-bottom:0;}
 .auth-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.auth-password-field{position:relative;display:flex;align-items:center;}
+.auth-password-field .input{width:100%;padding-right:40px;}
+.auth-password-field .auth-password-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:5px;background:transparent;color:var(--muted);cursor:pointer;transition:color .18s,background .18s;}
+.auth-password-field .auth-password-toggle:hover{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);}
+.auth-password-field .auth-password-toggle svg{width:16px;height:16px;}
+.auth-password-field.input-invalid{border:1px solid rgba(224,130,107,.72);border-radius:8px;box-shadow:0 0 0 3px rgba(224,130,107,.12)!important;}
 .input-invalid{border-color:rgba(224,130,107,.72)!important;box-shadow:0 0 0 3px rgba(224,130,107,.12)!important;}
 .auth-divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;}
 .auth-divider::before,.auth-divider::after{content:"";height:1px;flex:1;background:var(--border-soft);}
